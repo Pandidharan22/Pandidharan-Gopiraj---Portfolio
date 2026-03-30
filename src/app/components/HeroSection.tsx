@@ -20,7 +20,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-accent via-glow to-accent bg-clip-text text-transparent"
+            className="text-5xl md:text-7xl font-bold mb-6 text-foreground"
           >
             Alex Morgan
           </motion.h1>
@@ -54,14 +54,14 @@ export function HeroSection() {
           >
             <button
               onClick={() => scrollToSection('projects')}
-              className="group px-8 py-4 bg-accent text-white rounded-lg hover:bg-accent/90 transition-all duration-300 flex items-center gap-2 shadow-lg shadow-accent/20 hover:shadow-accent/40"
+              className="group px-8 py-4 bg-foreground text-background border border-transparent rounded-lg hover:bg-background hover:text-foreground hover:border-foreground transition-all duration-300 flex items-center gap-2"
             >
               <span>View Projects</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
             <button
               onClick={() => scrollToSection('insights')}
-              className="px-8 py-4 border-2 border-accent text-accent rounded-lg hover:bg-accent hover:text-white transition-all duration-300"
+              className="px-8 py-4 border border-border text-foreground rounded-lg hover:bg-foreground hover:text-background transition-all duration-300"
             >
               Explore Insights
             </button>
@@ -79,9 +79,9 @@ export function HeroSection() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-accent/50 rounded-full flex items-start justify-center p-2"
+          className="w-6 h-10 border-2 border-foreground/50 rounded-full flex items-start justify-center p-2"
         >
-          <motion.div className="w-1.5 h-1.5 bg-accent rounded-full" />
+          <motion.div className="w-1.5 h-1.5 bg-foreground rounded-full" />
         </motion.div>
       </motion.div>
     </section>

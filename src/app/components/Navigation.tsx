@@ -32,14 +32,14 @@ export function Navigation({ theme, onThemeToggle }: NavigationProps) {
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-surface/90 backdrop-blur-lg border-b border-border shadow-lg'
+          ? 'bg-background/80 backdrop-blur-lg border-b border-border'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#hero" className="text-xl font-bold text-foreground hover:text-accent transition-colors">
+          <a href="#hero" className="text-xl font-bold text-foreground hover:opacity-70 transition-opacity">
             AI.Engineer
           </a>
 
@@ -49,7 +49,7 @@ export function Navigation({ theme, onThemeToggle }: NavigationProps) {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm text-foreground/80 hover:text-accent transition-colors"
+                className="relative text-sm text-foreground/80 hover:text-foreground transition-colors after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-foreground after:transition-all after:duration-300"
               >
                 {link.label}
               </a>
@@ -69,7 +69,7 @@ export function Navigation({ theme, onThemeToggle }: NavigationProps) {
                 <Moon className="w-5 h-5" />
               )}
             </button>
-            <button className="hidden sm:flex items-center gap-2 px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors">
+            <button className="hidden sm:flex items-center gap-2 px-4 py-2 bg-foreground text-background border border-transparent rounded-lg hover:bg-background hover:text-foreground hover:border-foreground transition-all duration-300">
               <Download className="w-4 h-4" />
               <span className="text-sm">Resume</span>
             </button>

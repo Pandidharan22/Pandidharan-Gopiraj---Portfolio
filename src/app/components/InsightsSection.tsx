@@ -209,7 +209,7 @@ export function InsightsSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Technical Insights</h2>
-          <div className="h-1 w-20 bg-gradient-to-r from-accent to-glow rounded-full mb-8" />
+          <div className="h-1 w-20 bg-foreground rounded-full mb-8" />
           <p className="text-lg text-foreground/70 mb-12 max-w-3xl">
             Thoughts and learnings from building AI systems in production.
           </p>
@@ -227,8 +227,8 @@ export function InsightsSection() {
             onClick={() => setActiveFilter('All')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
               activeFilter === 'All'
-                ? 'bg-accent text-white shadow-lg shadow-accent/30'
-                : 'bg-surface border border-border hover:border-accent/50'
+                ? 'bg-foreground text-background border border-transparent hover:bg-background hover:text-foreground hover:border-foreground transition-all shadow-lg shadow-black/10 dark:shadow-white/10'
+                : 'bg-surface border border-border hover:border-foreground/50'
             }`}
           >
             All
@@ -239,8 +239,8 @@ export function InsightsSection() {
               onClick={() => setActiveFilter(tag)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 activeFilter === tag
-                  ? 'bg-accent text-white shadow-lg shadow-accent/30'
-                  : 'bg-surface border border-border hover:border-accent/50'
+                  ? 'bg-foreground text-background border border-transparent hover:bg-background hover:text-foreground hover:border-foreground transition-all shadow-lg shadow-black/10 dark:shadow-white/10'
+                  : 'bg-surface border border-border hover:border-foreground/50'
               }`}
             >
               {tag}
@@ -258,7 +258,7 @@ export function InsightsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               onClick={() => setSelectedArticle(article)}
-              className="group cursor-pointer p-6 rounded-xl bg-surface border border-border hover:border-accent transition-all duration-300 hover:shadow-2xl hover:shadow-accent/20 hover:scale-[1.02]"
+              className="group cursor-pointer p-6 rounded-xl bg-surface border border-border hover:border-foreground transition-all duration-300 hover:shadow-2xl hover:shadow-black/5 dark:shadow-white/5 hover:scale-[1.02]"
             >
               {/* Date & Read Time */}
               <div className="flex items-center gap-4 text-xs text-foreground/60 mb-4">
@@ -270,7 +270,7 @@ export function InsightsSection() {
               </div>
 
               {/* Title */}
-              <h3 className="text-lg font-semibold mb-3 group-hover:text-accent transition-colors line-clamp-2">
+              <h3 className="text-lg font-semibold mb-3 group-hover:text-foreground font-semibold transition-colors line-clamp-2">
                 {article.title}
               </h3>
 
@@ -282,7 +282,7 @@ export function InsightsSection() {
                 {article.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 py-1 text-xs rounded-full bg-accent/10 text-accent border border-accent/20"
+                    className="px-2 py-1 text-xs rounded-full bg-foreground/10 text-foreground font-semibold border border-border"
                   >
                     {tag}
                   </span>
@@ -309,7 +309,7 @@ export function InsightsSection() {
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: 'spring', damping: 25 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-surface rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-accent/20 shadow-2xl my-8"
+              className="bg-surface rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-border shadow-2xl my-8"
             >
               {/* Header */}
               <div className="sticky top-0 bg-surface border-b border-border p-6 flex items-start justify-between z-10">
@@ -326,7 +326,7 @@ export function InsightsSection() {
                     {selectedArticle.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent border border-accent/20"
+                        className="px-3 py-1 text-xs rounded-full bg-foreground/10 text-foreground font-semibold border border-border"
                       >
                         {tag}
                       </span>
@@ -346,7 +346,7 @@ export function InsightsSection() {
                 <div className="prose prose-lg max-w-none">
                   {selectedArticle.content.sections.map((section, index) => (
                     <div key={index} className="mb-8">
-                      <h4 className="text-xl font-semibold mb-4 text-accent">
+                      <h4 className="text-xl font-semibold mb-4 text-foreground font-semibold">
                         {section.heading}
                       </h4>
                       <p className="text-foreground/80 leading-relaxed">{section.content}</p>

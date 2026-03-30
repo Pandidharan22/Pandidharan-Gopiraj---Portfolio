@@ -70,7 +70,7 @@ export function SkillsSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Skills & Technologies</h2>
-          <div className="h-1 w-20 bg-gradient-to-r from-accent to-glow rounded-full mb-12" />
+          <div className="h-1 w-20 bg-foreground rounded-full mb-12" />
         </motion.div>
 
         <div className="space-y-12">
@@ -99,7 +99,7 @@ export function SkillsSection() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.3, delay: catIndex * 0.1 + skillIndex * 0.02 }}
                       whileHover={{ scale: 1.05 }}
-                      className={`px-4 py-2 rounded-lg bg-surface border border-border hover:border-accent/50 transition-all cursor-default shadow-sm hover:shadow-lg hover:shadow-accent/10`}
+                      className={`px-4 py-2 rounded-lg bg-surface border border-border hover:border-foreground/50 transition-all cursor-default shadow-sm hover:shadow-lg hover:shadow-black/5 dark:shadow-white/5`}
                     >
                       <span className="text-sm font-medium">{skill.name}</span>
                     </motion.div>
@@ -116,7 +116,7 @@ export function SkillsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16 p-8 rounded-xl bg-gradient-to-r from-accent/10 to-glow/10 border border-accent/20"
+          className="mt-16 p-8 rounded-xl bg-surface border border-border"
         >
           <p className="text-lg text-center text-foreground/80">
             Constantly learning and adapting to new technologies in the rapidly evolving AI landscape.

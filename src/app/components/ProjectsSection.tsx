@@ -100,7 +100,7 @@ export function ProjectsSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Projects</h2>
-          <div className="h-1 w-20 bg-gradient-to-r from-accent to-glow rounded-full mb-12" />
+          <div className="h-1 w-20 bg-foreground rounded-full mb-12" />
         </motion.div>
 
         {/* Project Grid */}
@@ -113,9 +113,9 @@ export function ProjectsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               onClick={() => setSelectedProject(project)}
-              className="group cursor-pointer p-6 rounded-xl bg-surface border border-border hover:border-accent transition-all duration-300 hover:shadow-2xl hover:shadow-accent/20 hover:scale-[1.02]"
+              className="group cursor-pointer p-6 rounded-xl bg-surface border border-border hover:border-foreground transition-all duration-300 hover:shadow-2xl hover:shadow-black/5 dark:shadow-white/5 hover:scale-[1.02]"
             >
-              <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">
+              <h3 className="text-xl font-semibold mb-3 group-hover:text-foreground font-semibold transition-colors">
                 {project.title}
               </h3>
               <p className="text-sm text-foreground/70 mb-4">{project.impact}</p>
@@ -123,7 +123,7 @@ export function ProjectsSection() {
                 {project.tags.slice(0, 3).map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent border border-accent/20"
+                    className="px-3 py-1 text-xs rounded-full bg-foreground/10 text-foreground font-semibold border border-border"
                   >
                     {tag}
                   </span>
@@ -155,7 +155,7 @@ export function ProjectsSection() {
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: 'spring', damping: 25 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-surface rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-accent/20 shadow-2xl"
+              className="bg-surface rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-border shadow-2xl"
             >
               {/* Header */}
               <div className="sticky top-0 bg-surface border-b border-border p-6 flex items-start justify-between">
@@ -165,7 +165,7 @@ export function ProjectsSection() {
                     {selectedProject.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1 text-xs rounded-full bg-accent/10 text-accent border border-accent/20"
+                        className="px-3 py-1 text-xs rounded-full bg-foreground/10 text-foreground font-semibold border border-border"
                       >
                         {tag}
                       </span>
@@ -183,14 +183,14 @@ export function ProjectsSection() {
               {/* Content */}
               <div className="p-6 space-y-8">
                 {/* Impact */}
-                <div className="p-4 rounded-lg bg-accent/5 border border-accent/20">
-                  <p className="text-lg text-accent font-medium">{selectedProject.impact}</p>
+                <div className="p-4 rounded-lg bg-foreground/5 border border-border">
+                  <p className="text-lg text-foreground font-semibold font-medium">{selectedProject.impact}</p>
                 </div>
 
                 {/* Problem Statement */}
                 <div>
                   <h4 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                    <Shield className="w-5 h-5 text-accent" />
+                    <Shield className="w-5 h-5 text-foreground font-semibold" />
                     Problem Statement
                   </h4>
                   <p className="text-foreground/80 leading-relaxed">{selectedProject.problem}</p>
@@ -199,7 +199,7 @@ export function ProjectsSection() {
                 {/* Approach */}
                 <div>
                   <h4 className="text-xl font-semibold mb-3 flex items-center gap-2">
-                    <Zap className="w-5 h-5 text-accent" />
+                    <Zap className="w-5 h-5 text-foreground font-semibold" />
                     Approach
                   </h4>
                   <p className="text-foreground/80 leading-relaxed">{selectedProject.approach}</p>
@@ -211,7 +211,7 @@ export function ProjectsSection() {
                   <ul className="space-y-2">
                     {selectedProject.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-foreground mt-2 flex-shrink-0" />
                         <span className="text-foreground/80">{feature}</span>
                       </li>
                     ))}
@@ -221,7 +221,7 @@ export function ProjectsSection() {
                 {/* Results */}
                 <div>
                   <h4 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                    <Gauge className="w-5 h-5 text-accent" />
+                    <Gauge className="w-5 h-5 text-foreground font-semibold" />
                     Results & Impact
                   </h4>
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -230,7 +230,7 @@ export function ProjectsSection() {
                         key={index}
                         className="p-4 rounded-lg bg-surface border border-border"
                       >
-                        <p className="text-sm font-medium text-glow">{result}</p>
+                        <p className="text-sm font-medium text-foreground/80">{result}</p>
                       </div>
                     ))}
                   </div>
@@ -241,7 +241,7 @@ export function ProjectsSection() {
                   {selectedProject.demoLink && (
                     <a
                       href={selectedProject.demoLink}
-                      className="flex items-center gap-2 px-6 py-3 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors"
+                      className="flex items-center gap-2 px-6 py-3 bg-foreground text-background border border-transparent rounded-lg hover:bg-background hover:text-foreground hover:border-foreground transition-all duration-300"
                     >
                       <ExternalLink className="w-4 h-4" />
                       <span>View Demo</span>
@@ -250,7 +250,7 @@ export function ProjectsSection() {
                   {selectedProject.githubLink && (
                     <a
                       href={selectedProject.githubLink}
-                      className="flex items-center gap-2 px-6 py-3 border border-accent text-accent rounded-lg hover:bg-accent hover:text-white transition-colors"
+                      className="flex items-center gap-2 px-6 py-3 border border-foreground text-foreground font-semibold rounded-lg hover:bg-foreground hover:text-background transition-colors"
                     >
                       <Github className="w-4 h-4" />
                       <span>View Code</span>
