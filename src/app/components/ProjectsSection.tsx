@@ -39,52 +39,7 @@ const projects: Project[] = [
     demoLink: '#',
     githubLink: '#',
   },
-  {
-    id: 'complaint-management',
-    title: 'AI Complaint Management System',
-    impact: 'Automated classification and routing of 10,000+ customer complaints monthly',
-    tags: ['NLP', 'BERT', 'React', 'FastAPI', 'Redis'],
-    problem: 'Customer support teams were overwhelmed with manually categorizing and routing thousands of complaints, leading to slow response times and customer dissatisfaction.',
-    approach: 'Developed an NLP-powered system using fine-tuned BERT models to automatically classify complaints into 15+ categories, extract key entities, and route to appropriate departments.',
-    features: [
-      'Multi-label classification with BERT',
-      'Named entity recognition for key information',
-      'Sentiment analysis for priority scoring',
-      'Auto-routing to relevant departments',
-      'Dashboard for tracking and analytics',
-    ],
-    results: [
-      '95% classification accuracy',
-      '70% faster routing time',
-      '3x increase in complaint resolution speed',
-      'Improved customer satisfaction by 35%',
-    ],
-    demoLink: '#',
-    githubLink: '#',
-  },
-  {
-    id: 'temperature-prediction',
-    title: 'Temperature Prediction Model',
-    impact: 'Achieved 98% accuracy in predicting temperature trends for climate research',
-    tags: ['Python', 'TensorFlow', 'Time Series', 'Pandas', 'Scikit-learn'],
-    problem: 'Climate researchers needed accurate temperature predictions to model long-term environmental changes, but existing models struggled with irregular patterns.',
-    approach: 'Built a hybrid model combining LSTM networks with traditional statistical methods (ARIMA) to capture both short-term fluctuations and long-term trends.',
-    features: [
-      'LSTM-ARIMA hybrid architecture',
-      'Multi-variate time series analysis',
-      'Seasonal decomposition',
-      'Uncertainty quantification',
-      'Interactive visualization dashboard',
-    ],
-    results: [
-      '98% prediction accuracy',
-      '25% better than baseline models',
-      'Handles 50+ years of historical data',
-      'Used by 3 research institutions',
-    ],
-    demoLink: '#',
-    githubLink: '#',
-  },
+
 ];
 
 export function ProjectsSection() {

@@ -8,7 +8,7 @@ interface Skill {
 const skills: Skill[] = [
   // AI / ML
   { name: 'Python', category: 'ai-ml' },
-  { name: 'TensorFlow', category: 'ai-ml' },
+  { name: 'Agentic AI', category: 'ai-ml' },
   { name: 'PyTorch', category: 'ai-ml' },
   { name: 'Scikit-learn', category: 'ai-ml' },
   { name: 'BERT', category: 'ai-ml' },
@@ -22,34 +22,18 @@ const skills: Skill[] = [
   
   // Data Engineering
   { name: 'SQL', category: 'data-engineering' },
-  { name: 'PostgreSQL', category: 'data-engineering' },
   { name: 'MongoDB', category: 'data-engineering' },
-  { name: 'Apache Spark', category: 'data-engineering' },
   { name: 'Pandas', category: 'data-engineering' },
   { name: 'NumPy', category: 'data-engineering' },
   { name: 'ETL Pipelines', category: 'data-engineering' },
-  { name: 'Data Warehousing', category: 'data-engineering' },
   
   // Backend / Systems
   { name: 'FastAPI', category: 'backend-systems' },
-  { name: 'Django', category: 'backend-systems' },
-  { name: 'Node.js', category: 'backend-systems' },
-  { name: 'Redis', category: 'backend-systems' },
-  { name: 'Docker', category: 'backend-systems' },
-  { name: 'Kubernetes', category: 'backend-systems' },
-  { name: 'AWS', category: 'backend-systems' },
-  { name: 'GCP', category: 'backend-systems' },
-  { name: 'CI/CD', category: 'backend-systems' },
   
   // Tools
   { name: 'Git', category: 'tools' },
-  { name: 'MLflow', category: 'tools' },
-  { name: 'Weights & Biases', category: 'tools' },
   { name: 'Jupyter', category: 'tools' },
   { name: 'Linux', category: 'tools' },
-  { name: 'Airflow', category: 'tools' },
-  { name: 'Grafana', category: 'tools' },
-  { name: 'Prometheus', category: 'tools' },
 ];
 
 const categories = [

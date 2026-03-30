@@ -92,7 +92,7 @@ export function ContactSection() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-24 pt-8 border-t border-border text-center text-sm text-foreground/60"
         >
-          <p>© 2026 Alex Morgan. Building the future of AI, one system at a time.</p>
+          <p>© 2026 Pandidharan Gopiraj. Building the future of AI, one system at a time.</p>
         </motion.div>
       </div>
     </section>

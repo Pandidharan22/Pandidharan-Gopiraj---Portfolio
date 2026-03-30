@@ -22,7 +22,7 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-5xl md:text-7xl font-bold mb-6 text-foreground"
           >
-            Alex Morgan
+            Pandidharan Gopiraj
           </motion.h1>
 
           {/* Role */}
