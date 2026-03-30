@@ -1,0 +1,201 @@
+📄 PRODUCT REQUIREMENT DOCUMENT
+Project: Personal Portfolio (AI Engineer – Showcase Style)
+1. Overview
+
+Objective:
+Design and develop a single-page, high-performance portfolio website that presents an AI Engineer with strong capabilities in system design, machine learning, and real-world AI deployment.
+
+Primary Goals:
+
+Impress recruiters within 60 seconds
+Convert freelance visitors into clients
+Showcase technical depth and systems thinking
+Maintain a futuristic, smooth, and interactive experience
+2. Target Audience
+Primary:
+Recruiters (AI / ML / Data roles)
+Hiring managers
+Secondary:
+Freelance clients (AI solutions, automation, backend systems)
+3. Design Philosophy
+
+Style:
+Controlled Futurism (clean base + intelligent interactions)
+
+Keywords:
+
+Minimal but dynamic
+Futuristic but professional
+Interactive but not distracting
+4. Information Architecture
+Single Page Sections (Top → Bottom)
+Hero
+About
+Projects
+Skills
+Insights (Blog)
+Contact
+5. Section Specifications
+5.1 Hero Section
+Purpose:
+
+Immediate identity + differentiation
+
+Layout:
+Full-screen height
+Center-left aligned text
+Background animation layer
+Content:
+Name (Large heading)
+Role:
+“AI Engineer | ML Engineer | Data Analyst”
+Tagline:
+“Designing AI systems that don’t just predict — they validate, adapt, and self-heal.”
+CTA Buttons:
+Primary: “View Projects”
+Secondary: “Explore Insights”
+Background:
+Interactive neural network / particle system
+Subtle cursor interaction
+5.2 About Section
+Layout:
+Two-column (text + highlights)
+Content:
+Short bio (3–4 lines)
+Focus Areas:
+AI Systems Engineering
+NLP (BERT, LLaMA)
+ML Optimization
+Applied Data Science
+Subsection:
+
+“What I Do Differently”
+
+Systems over isolated models
+Reliability (trust scoring, validation)
+Performance optimization
+5.3 Projects Section
+Layout:
+Grid (3 columns desktop, 1 column mobile)
+Project Card:
+Title
+One-line impact
+Tech stack tags
+Interaction:
+Hover → glow + slight scale
+Click → expands into full-screen modal/page
+Project Detail View:
+
+Each project includes:
+
+Problem Statement
+Approach
+Architecture Diagram (placeholder)
+Key Features
+Results (metrics)
+Demo + GitHub links
+Highlight Order:
+Self-Healing LLM Ops Platform
+AI Complaint Management System
+Temperature Prediction Model
+5.4 Skills Section
+Layout:
+Node/network visualization OR categorized grid
+Categories:
+AI / ML
+Data Engineering
+Backend / Systems
+Tools
+Interaction:
+Hover highlights connections or emphasis
+5.5 Insights Section (Technical Blog)
+Layout:
+Card grid with filters
+Card Content:
+Title
+Short summary
+Tags
+Read time
+Interaction:
+Click → opens article overlay/page
+Article Layout:
+Left: content
+Right: sticky Table of Contents
+5.6 Contact Section
+Layout:
+Center aligned
+Content:
+Email
+LinkedIn
+GitHub
+CTA:
+
+“Let’s build something impactful.”
+
+6. Design System
+6.1 Color Tokens
+Dark Mode (Primary)
+Background: #0B0F19
+Surface: #111827
+Accent: #3B82F6
+Glow: #22D3EE
+Text: #E5E7EB
+Light Mode
+Background: #F9FAFB
+Surface: #FFFFFF
+Accent: #2563EB
+Text: #111827
+6.2 Typography
+Heading: Space Grotesk
+Body: Inter
+Code: JetBrains Mono
+6.3 Spacing
+Base unit: 8px
+Section padding: 80–120px
+Card padding: 24–32px
+7. Animation & Interaction
+Motion Guidelines:
+Duration: 200–400ms
+Easing: ease-in-out
+Animations:
+Page Load
+Fade-in + slight upward motion
+Scroll Reveal
+Opacity + translateY
+Hover Effects
+Scale (1.02)
+Glow border
+Special Interaction:
+Background System
+Node/particle system reacts to cursor
+Subtle movement (low intensity)
+8. Navigation
+Type:
+Sticky navbar
+Behavior:
+Transparent → solid on scroll
+Smooth scroll to sections
+9. Additional Features
+Light/Dark mode toggle
+Resume download button
+Smooth scrolling
+Responsive design
+10. Performance Requirements
+Fast load (<2s initial load target)
+Optimized animations (no lag)
+Lazy loading for heavy assets
+11. Tone & Copy Guidelines
+Avoid:
+Generic phrases
+Long paragraphs
+Use:
+Direct, technical language
+Impact-driven statements
+12. Deliverables for Figma AI
+
+Design should include:
+
+Full-page layout
+Component library
+Color + typography tokens
+Interaction hints (hover, click states)
