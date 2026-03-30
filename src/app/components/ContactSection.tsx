@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Mail, Linkedin, Github, Send } from 'lucide-react';
+import { Mail, Linkedin, Github, Send, Download } from 'lucide-react';
 
 export function ContactSection() {
   const contactLinks = [
@@ -73,14 +73,19 @@ export function ContactSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <a
               href="mailto:pandidharan7@gmail.com"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-foreground text-background border border-transparent rounded-lg hover:bg-background hover:text-foreground hover:border-foreground transition-all duration-300 group"
+              className="w-full sm:w-auto inline-flex justify-center items-center gap-3 px-8 py-4 bg-foreground text-background border border-transparent rounded-lg hover:bg-background hover:text-foreground hover:border-foreground transition-all duration-300 group"
             >
               <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               <span className="font-medium">Send a Message</span>
             </a>
+            <button className="w-full sm:w-auto inline-flex justify-center items-center gap-3 px-8 py-4 border border-foreground text-foreground rounded-lg hover:bg-foreground hover:text-background transition-all duration-300 group">
+              <Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
+              <span className="font-medium">Download Resume</span>
+            </button>
           </motion.div>
         </motion.div>
 
