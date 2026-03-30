@@ -6,22 +6,22 @@ export function ContactSection() {
     {
       icon: Mail,
       label: 'Email',
-      value: 'alex.morgan@aiengr.io',
-      href: 'mailto:alex.morgan@aiengr.io',
+      value: 'pandidharan7@gmail.com',
+      href: 'mailto:pandidharan7@gmail.com',
       color: 'hover:text-blue-500',
     },
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      value: 'linkedin.com/in/alexmorgan',
-      href: 'https://linkedin.com/in/alexmorgan',
+      value: 'linkedin.com/in/pandi-dharan-g-r',
+      href: 'https://linkedin.com/in/pandi-dharan-g-r',
       color: 'hover:text-blue-600',
     },
     {
       icon: Github,
       label: 'GitHub',
-      value: 'github.com/alexmorgan',
-      href: 'https://github.com/alexmorgan',
+      value: 'github.com/Pandidharan22',
+      href: 'https://github.com/Pandidharan22',
       color: 'hover:text-purple-500',
     },
   ];
@@ -75,7 +75,7 @@ export function ContactSection() {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <a
-              href="mailto:alex.morgan@aiengr.io"
+              href="mailto:pandidharan7@gmail.com"
               className="inline-flex items-center gap-3 px-8 py-4 bg-foreground text-background border border-transparent rounded-lg hover:bg-background hover:text-foreground hover:border-foreground transition-all duration-300 group"
             >
               <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
