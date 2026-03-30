@@ -48,8 +48,8 @@ export function BackgroundAnimation() {
         this.y = Math.random() * canvas!.height;
         this.vx = (Math.random() - 0.5) * 0.4;
         this.vy = (Math.random() - 0.5) * 0.4;
-        this.radius = Math.random() * 1.5 + 0.5;
-        this.baseOpacity = Math.random() * 0.6 + 0.2; // 0.2 to 0.8 opacity
+        this.radius = Math.random() * 2 + 1; // 1.0 to 3.0 radius
+        this.baseOpacity = Math.random() * 0.5 + 0.5; // 0.5 to 1.0 opacity
         this.pulsePhase = Math.random() * Math.PI * 2;
       }
 
@@ -72,14 +72,14 @@ export function BackgroundAnimation() {
         let interactionOpacity = 0;
         let interactionScale = 1;
 
-        if (distToMouse < 200) {
-          const factor = 1 - distToMouse / 200;
-          interactionOpacity = 0.5 * factor;
-          interactionScale = 1 + factor * 0.5; // Slight grow
+        if (distToMouse < 250) {
+          const factor = 1 - distToMouse / 250;
+          interactionOpacity = 0.6 * factor;
+          interactionScale = 1 + factor * 0.8; // Noticeable grow
         }
 
         // Pulse logic
-        const pulse = (Math.sin(this.pulsePhase) + 1) * 0.15; // 0 to 0.3
+        const pulse = (Math.sin(this.pulsePhase) + 1) * 0.25; // 0 to 0.5
         
         // Final calculations
         const finalOpacity = Math.min(1, this.baseOpacity + pulse + interactionOpacity);
@@ -94,7 +94,7 @@ export function BackgroundAnimation() {
 
     // Create particles
     const particles: Particle[] = [];
-    const particleCount = Math.min(Math.floor(window.innerWidth / 15), 100); // Responsive count
+    const particleCount = Math.min(Math.floor(window.innerWidth / 8), 180); // Increased density
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }
@@ -135,9 +135,9 @@ export function BackgroundAnimation() {
           const dy = particle.y - otherParticle.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 150) {
+          if (distance < 180) {
             // Pulse propagation
-            const combinedPulse = (Math.sin(particle.pulsePhase + otherParticle.pulsePhase) + 1) * 0.08;
+            const combinedPulse = (Math.sin(particle.pulsePhase + otherParticle.pulsePhase) + 1) * 0.15;
             
             // Mouse connection logic
             const midX = (particle.x + otherParticle.x) / 2;
@@ -147,11 +147,11 @@ export function BackgroundAnimation() {
             const distToMouse = Math.sqrt(midDx * midDx + midDy * midDy);
             
             let interactionOpacity = 0;
-            if (distToMouse < 200) {
-              interactionOpacity = 0.4 * (1 - distToMouse / 200);
+            if (distToMouse < 250) {
+              interactionOpacity = 0.5 * (1 - distToMouse / 250);
             }
 
-            const baseEdgeOpacity = 0.15 * (1 - distance / 150);
+            const baseEdgeOpacity = 0.3 * (1 - distance / 180);
             const finalEdgeOpacity = Math.min(1, baseEdgeOpacity + combinedPulse + interactionOpacity);
 
             ctx.beginPath();
@@ -180,7 +180,7 @@ export function BackgroundAnimation() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none opacity-40 transition-opacity duration-500"
+      className="fixed inset-0 pointer-events-none opacity-80 transition-opacity duration-500"
       style={{ zIndex: 0 }}
     />
   );
