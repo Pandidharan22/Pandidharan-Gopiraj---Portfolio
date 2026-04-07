@@ -8,7 +8,7 @@ export function ContactSection() {
       label: 'Email',
       value: 'pandidharan7@gmail.com',
       href: 'mailto:pandidharan7@gmail.com',
-      color: 'hover:text-blue-500',
+      color: 'hover:text-green-500',
     },
     {
       icon: Linkedin,
