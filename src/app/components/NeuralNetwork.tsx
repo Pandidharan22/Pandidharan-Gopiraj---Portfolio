@@ -23,34 +23,30 @@ export const NeuralNetwork = () => {
 
   // Precompute nodes and edges for performance
   const { nodes, edges } = useMemo(() => {
-    const numNodes = 250; // Increased for higher density
-    const numClusters = 7;
-    
-    // Create random cluster centers wide across the screen
-    const clusters = Array.from({ length: numClusters }, () => new THREE.Vector3(
-      (Math.random() - 0.5) * 40, // Wide X spread to fill screen
-      (Math.random() - 0.5) * 20, // Wide Y spread 
-      (Math.random() - 0.5) * 30  // Deep Z spread
-    ));
+    // Utilize Jittered Grid sampling to guarantee perfect spatial uniformity (no empty voids)
+    const nodes: NodeData[] = [];
+    const xSeg = 8, ySeg = 6, zSeg = 12; // Controls density in each axis
+    const width = 120, height = 80, depth = 200; // Overall volume size
+    let idCounter = 0;
 
-    // Generate nodes clustered around centers
-    const nodes: NodeData[] = Array.from({ length: numNodes }, (_, i) => {
-      const cluster = clusters[Math.floor(Math.random() * numClusters)];
-      // Radial spread around cluster center
-      const offset = new THREE.Vector3(
-        (Math.random() - 0.5) * 15,
-        (Math.random() - 0.5) * 15,
-        (Math.random() - 0.5) * 15
-      );
-      
-      return {
-        id: i,
-        basePosition: cluster.clone().add(offset),
-        timeOffset: Math.random() * 100, // For desynchronized floating animations
-        opacity: 0.4 + Math.random() * 0.6, // Opacity variation
-        scale: 0.05 + Math.random() * 0.03  // Scale variation ~0.05 - 0.08
-      };
-    });
+    for (let ix = 0; ix < xSeg; ix++) {
+      for (let iy = 0; iy < ySeg; iy++) {
+        for (let iz = 0; iz < zSeg; iz++) {
+          // Guarantee 1 node per sub-cell, placed randomly within its own cell boundaries
+          const px = -width / 2 + (ix + Math.random()) * (width / xSeg);
+          const py = -height / 2 + (iy + Math.random()) * (height / ySeg);
+          const pz = -depth / 2 + (iz + Math.random()) * (depth / zSeg);
+          
+          nodes.push({
+            id: idCounter++,
+            basePosition: new THREE.Vector3(px, py, pz),
+            timeOffset: Math.random() * 100, // For desynchronized floating animations
+            opacity: 0.4 + Math.random() * 0.6, // Opacity variation
+            scale: 0.05 + Math.random() * 0.03  // Scale variation ~0.05 - 0.08
+          });
+        }
+      }
+    }
 
     // 1. Center the entire network perfectly on the origin (0,0,0)
     const centerPoint = new THREE.Vector3();
@@ -112,8 +108,8 @@ export const NeuralNetwork = () => {
   const lineColors = useMemo(() => {
     const colors = new Float32Array(edges.length * 6);
     edges.forEach((edge, i) => {
-      // Base edge opacity/intensity on distance; mapped to new wider spread sizes
-      const intensity = Math.max(0.1, 1.0 - (edge.distance / 15)); 
+      // Base edge opacity/intensity on distance; mapped to new massive spreads
+      const intensity = Math.max(0.05, 0.8 - (edge.distance / 25)); 
       // Set RGB values to fake opacity with vertex colors
       colors.set([intensity, intensity, intensity, intensity, intensity, intensity], i * 6);
     });

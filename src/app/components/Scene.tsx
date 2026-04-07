@@ -10,8 +10,8 @@ const Scene = () => {
 
   useFrame((state, delta) => {
     if (groupRef.current) {
-      // Use scroll data to glide camera through neural network structure
-      state.camera.position.z = THREE.MathUtils.lerp(state.camera.position.z, 8 - scroll.offset * 20, 0.05);
+      // Use scroll data to glide camera deeply through vastly expanded network
+      state.camera.position.z = THREE.MathUtils.lerp(state.camera.position.z, 20 - scroll.offset * 120, 0.05);
       state.camera.rotation.y = THREE.MathUtils.lerp(state.camera.rotation.y, -scroll.offset * 0.2, 0.05);
     }
   });
