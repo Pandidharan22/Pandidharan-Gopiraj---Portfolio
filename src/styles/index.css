@@ -314,6 +314,12 @@ html:not(.dark) .custom-scrollbar::-webkit-scrollbar-track {
   background-clip: content-box;
 }
 
+.allow-touch-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+}
+
 html.dark .themed-scrollbar::-webkit-scrollbar-thumb,
 html.dark .custom-scrollbar::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, rgba(226, 232, 240, 0.72), rgba(156, 163, 175, 0.7));

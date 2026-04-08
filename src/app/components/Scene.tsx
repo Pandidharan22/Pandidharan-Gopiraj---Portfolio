@@ -20,6 +20,8 @@ const Scene = ({ onActiveSectionChange, navigationRequest, interactionEnabled = 
   const targetProgress = useRef(0);
   const targetSection = useRef(0);
   const lastWheelAt = useRef(0);
+  const touchStartY = useRef<number | null>(null);
+  const touchStartedInScrollable = useRef(false);
   const isTransitioning = useRef(false);
   const lookAtTarget = useMemo(() => new THREE.Vector3(), []);
 
@@ -54,39 +56,109 @@ const Scene = ({ onActiveSectionChange, navigationRequest, interactionEnabled = 
     isTransitioning.current = Math.abs(progress.current - targetProgress.current) > 0.0003;
   }, [sectionCheckpoints]);
 
+  const isElementTouchScrollable = useCallback((target: EventTarget | null) => {
+    if (!(target instanceof Element)) {
+      return false;
+    }
+    return !!target.closest('.allow-touch-scroll, .project-modal-overlay, input, textarea, select, [contenteditable="true"]');
+  }, []);
+
+  const shouldBypassWheelNavigation = useCallback((target: EventTarget | null) => {
+    if (!(target instanceof Element)) {
+      return false;
+    }
+    return !!target.closest('.allow-touch-scroll, .project-modal-overlay, input, textarea, select, [contenteditable="true"]');
+  }, []);
+
+  const canNavigateByGesture = useCallback(() => {
+    const now = performance.now();
+    if (
+      now - lastWheelAt.current < 700 ||
+      isTransitioning.current ||
+      Math.abs(progress.current - targetProgress.current) > 0.003
+    ) {
+      return false;
+    }
+    lastWheelAt.current = now;
+    return true;
+  }, []);
+
   useEffect(() => {
     const onWheel = (event: WheelEvent) => {
-      event.preventDefault();
       if (!interactionEnabled) {
         return;
       }
 
-      const now = performance.now();
+      if (shouldBypassWheelNavigation(event.target)) {
+        // Let native wheel/touchpad scrolling work inside modal and form controls.
+        return;
+      }
+
+      event.preventDefault();
+
       // Throttle wheel input and avoid jumping while a transition is still in-flight.
-      if (
-        now - lastWheelAt.current < 700 ||
-        isTransitioning.current ||
-        Math.abs(progress.current - targetProgress.current) > 0.003
-      ) {
+      if (!canNavigateByGesture()) {
         return;
       }
 
       const direction = event.deltaY > 0 ? 1 : -1;
       requestSectionTransition(targetSection.current + direction);
-      lastWheelAt.current = now;
     };
 
-    const onTouchMove = (event: TouchEvent) => {
-      event.preventDefault();
+    const onTouchStart = (event: TouchEvent) => {
+      if (!interactionEnabled || event.touches.length !== 1) {
+        touchStartY.current = null;
+        touchStartedInScrollable.current = false;
+        return;
+      }
+
+      touchStartedInScrollable.current = isElementTouchScrollable(event.target);
+      touchStartY.current = event.touches[0]?.clientY ?? null;
+    };
+
+    const onTouchEnd = (event: TouchEvent) => {
+      if (!interactionEnabled || touchStartedInScrollable.current) {
+        touchStartY.current = null;
+        return;
+      }
+
+      if (event.changedTouches.length !== 1 || touchStartY.current === null) {
+        touchStartY.current = null;
+        return;
+      }
+
+      const endY = event.changedTouches[0]?.clientY;
+      if (typeof endY !== 'number') {
+        touchStartY.current = null;
+        return;
+      }
+
+      const deltaY = endY - touchStartY.current;
+      touchStartY.current = null;
+
+      const swipeThreshold = 48;
+      if (Math.abs(deltaY) < swipeThreshold) {
+        return;
+      }
+
+      if (!canNavigateByGesture()) {
+        return;
+      }
+
+      // Swipe up advances forward, swipe down goes back.
+      const direction = deltaY < 0 ? 1 : -1;
+      requestSectionTransition(targetSection.current + direction);
     };
 
     window.addEventListener('wheel', onWheel, { passive: false });
-    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
     return () => {
       window.removeEventListener('wheel', onWheel);
-      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchend', onTouchEnd);
     };
-  }, [interactionEnabled, requestSectionTransition, sectionCheckpoints.length]);
+  }, [canNavigateByGesture, interactionEnabled, isElementTouchScrollable, requestSectionTransition, shouldBypassWheelNavigation]);
 
   useEffect(() => {
     if (!navigationRequest) {

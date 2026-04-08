@@ -52,7 +52,7 @@ export function ProjectsSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[80] flex items-start justify-center pt-20 pb-6 px-4 bg-black/80 backdrop-blur-sm"
+        className="project-modal-overlay fixed inset-0 z-[80] flex items-start justify-center pt-20 pb-6 px-4 bg-black/80 backdrop-blur-sm"
         onClick={() => setSelectedProject(null)}
       >
         <motion.div
@@ -61,7 +61,7 @@ export function ProjectsSection() {
           exit={{ scale: 0.94, opacity: 0 }}
           transition={{ type: 'spring', damping: 25 }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-surface/50 rounded-2xl max-w-4xl w-full max-h-[calc(100vh-7rem)] overflow-y-auto themed-scrollbar border border-border shadow-2xl"
+          className="bg-surface/50 rounded-2xl max-w-4xl w-full max-h-[calc(100vh-7rem)] overflow-y-auto themed-scrollbar allow-touch-scroll touch-pan-y border border-border shadow-2xl"
         >
           {/* Header */}
           <div className="sticky top-0 bg-surface/50 border-b border-border p-6 flex items-start justify-between">
