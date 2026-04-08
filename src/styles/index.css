@@ -1,3 +1,34 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  overscroll-behavior: none; /* Prevent scroll leaking */
+}
+
+/* Ensure #root handles correct dimension constraint */
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Hard lock viewport to prevent document-level scroll drift */
+body {
+  position: fixed;
+  inset: 0;
+}
+
+/* ScrollControls uses this target, we can allow its inner divs to scroll */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
