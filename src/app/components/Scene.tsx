@@ -11,9 +11,10 @@ interface NavigationRequest {
 interface SceneProps {
   onActiveSectionChange?: (sectionIndex: number) => void;
   navigationRequest?: NavigationRequest | null;
+  interactionEnabled?: boolean;
 }
 
-const Scene = ({ onActiveSectionChange, navigationRequest }: SceneProps) => {
+const Scene = ({ onActiveSectionChange, navigationRequest, interactionEnabled = true }: SceneProps) => {
   const [activeSection, setActiveSection] = useState(0);
   const progress = useRef(0);
   const targetProgress = useRef(0);
@@ -56,6 +57,10 @@ const Scene = ({ onActiveSectionChange, navigationRequest }: SceneProps) => {
   useEffect(() => {
     const onWheel = (event: WheelEvent) => {
       event.preventDefault();
+      if (!interactionEnabled) {
+        return;
+      }
+
       const now = performance.now();
       // Throttle wheel input and avoid jumping while a transition is still in-flight.
       if (
@@ -81,7 +86,7 @@ const Scene = ({ onActiveSectionChange, navigationRequest }: SceneProps) => {
       window.removeEventListener('wheel', onWheel);
       window.removeEventListener('touchmove', onTouchMove);
     };
-  }, [requestSectionTransition, sectionCheckpoints.length]);
+  }, [interactionEnabled, requestSectionTransition, sectionCheckpoints.length]);
 
   useEffect(() => {
     if (!navigationRequest) {
@@ -129,7 +134,13 @@ const Scene = ({ onActiveSectionChange, navigationRequest }: SceneProps) => {
   );
 };
 
-export default function AppScene({ onActiveSectionChange, navigationRequest }: SceneProps) {
-  return <Scene onActiveSectionChange={onActiveSectionChange} navigationRequest={navigationRequest} />;
+export default function AppScene({ onActiveSectionChange, navigationRequest, interactionEnabled }: SceneProps) {
+  return (
+    <Scene
+      onActiveSectionChange={onActiveSectionChange}
+      navigationRequest={navigationRequest}
+      interactionEnabled={interactionEnabled}
+    />
+  );
 }
 

@@ -22,7 +22,7 @@ export default defineConfig({
 
   server: {
     allowedHosts: [
-      'distributor-equity-vocals-slides.trycloudflare.com'
+      'tobacco-bruce-klein-shots.trycloudflare.com'
     ]
   }
 })
