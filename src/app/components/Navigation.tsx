@@ -12,11 +12,7 @@ export function Navigation({ theme, onThemeToggle }: NavigationProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    document.body.style.overflow = 'hidden';
   }, [isMobileMenuOpen]);
 
   useEffect(() => {

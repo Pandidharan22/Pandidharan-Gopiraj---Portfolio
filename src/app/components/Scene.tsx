@@ -1,35 +1,13 @@
 import * as THREE from 'three';
 import { useRef, useState, useMemo, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Html } from '@react-three/drei';
 import { NeuralNetwork } from './NeuralNetwork';
-import { HeroSection } from './HeroSection';
-import { AboutSection } from './AboutSection';
-import { ProjectsSection } from './ProjectsSection';
-import { SkillsSection } from './SkillsSection';
-import { ContactSection } from './ContactSection';
 
-const SectionWrapper = ({ position, children, isActive }: { position: [number, number, number], children: React.ReactNode, isActive: boolean }) => {
-  return (
-    <group position={position}>
-      <Html 
-        fullscreen
-        style={{
-          opacity: isActive ? 1 : 0,
-          pointerEvents: isActive ? 'auto' : 'none',
-          transition: 'opacity 0.45s ease-out',
-        }}
-        className="text-foreground" // Use Tailwind theme variables
-      >
-        <div className="w-screen h-screen overflow-hidden flex items-center justify-center bg-transparent px-4 sm:px-6 md:px-8">
-          {children}
-        </div>
-      </Html>
-    </group>
-  );
-};
+interface SceneProps {
+  onActiveSectionChange?: (sectionIndex: number) => void;
+}
 
-const Scene = () => {
+const Scene = ({ onActiveSectionChange }: SceneProps) => {
   const [activeSection, setActiveSection] = useState(0);
   const progress = useRef(0);
   const targetProgress = useRef(0);
@@ -59,7 +37,7 @@ const Scene = () => {
     new THREE.Vector3(0, 3, -110),
   ], false, 'catmullrom', 0.5), [sectionAnchors]);
 
-  const sectionCheckpoints = useMemo(() => [0.0, 0.24, 0.48, 0.72, 0.9], []);
+  const sectionCheckpoints = useMemo(() => [0, 0.25, 0.5, 0.75, 1], []);
 
   useEffect(() => {
     const onWheel = (event: WheelEvent) => {
@@ -77,6 +55,7 @@ const Scene = () => {
       );
 
       targetProgress.current = sectionCheckpoints[targetSection.current];
+      setActiveSection(targetSection.current);
       lastWheelAt.current = now;
     };
 
@@ -92,21 +71,16 @@ const Scene = () => {
     };
   }, [sectionCheckpoints]);
 
+  useEffect(() => {
+    onActiveSectionChange?.(activeSection);
+  }, [activeSection, onActiveSectionChange]);
+
   useFrame((state) => {
     // Smooth the input to keep camera motion cinematic.
-    progress.current = THREE.MathUtils.lerp(progress.current, targetProgress.current, 0.08);
-
-    // Determine the active UI section from normalized scroll progress.
-    let nearestIndex = 0;
-    let nearestDistance = Number.POSITIVE_INFINITY;
-    for (let i = 0; i < sectionCheckpoints.length; i += 1) {
-      const d = Math.abs(progress.current - sectionCheckpoints[i]);
-      if (d < nearestDistance) {
-        nearestDistance = d;
-        nearestIndex = i;
-      }
+    progress.current = THREE.MathUtils.lerp(progress.current, targetProgress.current, 0.1);
+    if (Math.abs(progress.current - targetProgress.current) < 0.0008) {
+      progress.current = targetProgress.current;
     }
-    setActiveSection((prev) => (prev === nearestIndex ? prev : nearestIndex));
 
     // Determine where we should be on the curve (0 to 1) based on wheel progress.
     const pathPosition = cameraCurve.getPoint(progress.current);
@@ -126,32 +100,11 @@ const Scene = () => {
   return (
     <group>
       <NeuralNetwork />
-      
-      {/* Embedded 3D Portfolios Anchors */}
-      <SectionWrapper position={[0, 0, 0]} isActive={activeSection === 0}>
-        <HeroSection />
-      </SectionWrapper>
-      
-      <SectionWrapper position={[10, 2, -20]} isActive={activeSection === 1}>
-        <AboutSection />
-      </SectionWrapper>
-      
-      <SectionWrapper position={[-12, -3, -50]} isActive={activeSection === 2}>
-        <ProjectsSection />
-      </SectionWrapper>
-      
-      <SectionWrapper position={[8, -2, -80]} isActive={activeSection === 3}>
-        <SkillsSection />
-      </SectionWrapper>
-      
-      <SectionWrapper position={[0, 3, -110]} isActive={activeSection === 4}>
-        <ContactSection />
-      </SectionWrapper>
     </group>
   );
 };
 
-export default function AppScene() {
-  return <Scene />;
+export default function AppScene({ onActiveSectionChange }: SceneProps) {
+  return <Scene onActiveSectionChange={onActiveSectionChange} />;
 }
 

@@ -29,7 +29,7 @@ export function AboutSection() {
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
@@ -41,7 +41,7 @@ export function AboutSection() {
           {/* Left: Bio */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            animate={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
@@ -56,7 +56,7 @@ export function AboutSection() {
           {/* Right: Focus Areas */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            animate={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
@@ -66,7 +66,7 @@ export function AboutSection() {
                 <motion.div
                   key={area.title}
                   initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  animate={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
                   className="flex items-start gap-3 p-4 rounded-lg bg-surface/50 border border-border hover:border-foreground/50 transition-colors"
@@ -82,7 +82,7 @@ export function AboutSection() {
         {/* What I Do Differently */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-16"
@@ -93,7 +93,7 @@ export function AboutSection() {
               <motion.div
                 key={item.title}
                 initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
                 className="p-6 rounded-lg bg-surface border border-border hover:border-foreground/50 transition-all hover:shadow-lg hover:shadow-black/5 dark:shadow-white/5"

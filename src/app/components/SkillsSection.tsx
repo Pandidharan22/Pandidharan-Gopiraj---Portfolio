@@ -49,7 +49,7 @@ export function SkillsSection() {
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
@@ -65,7 +65,7 @@ export function SkillsSection() {
               <motion.div
                 key={category.id}
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: catIndex * 0.1 }}
               >
@@ -79,7 +79,7 @@ export function SkillsSection() {
                     <motion.div
                       key={skill.name}
                       initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
+                      animate={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.3, delay: catIndex * 0.1 + skillIndex * 0.02 }}
                       whileHover={{ scale: 1.05 }}
@@ -97,7 +97,7 @@ export function SkillsSection() {
         {/* Additional Info */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16 p-8 rounded-xl bg-surface border border-border"

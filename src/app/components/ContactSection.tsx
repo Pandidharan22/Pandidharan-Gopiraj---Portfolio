@@ -31,7 +31,7 @@ export function ContactSection() {
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto"
@@ -55,7 +55,7 @@ export function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={`group p-6 rounded-xl bg-surface border border-border hover:border-foreground transition-all duration-300 hover:shadow-xl hover:shadow-black/5 dark:shadow-white/5 ${link.color}`}
@@ -70,7 +70,7 @@ export function ContactSection() {
           {/* CTA Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
@@ -92,7 +92,7 @@ export function ContactSection() {
         {/* Footer */}
         <motion.div
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-24 pt-8 border-t border-border text-center text-sm text-foreground/60"
