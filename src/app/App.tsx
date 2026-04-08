@@ -9,14 +9,20 @@ import { SkillsSection } from './components/SkillsSection';
 import { ContactSection } from './components/ContactSection';
 
 type LayoutTier = 'normal' | 'compact' | 'dense' | 'micro';
+type NavigationRequest = {
+  sectionIndex: number;
+  requestId: number;
+};
 
 export default function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [activeSection, setActiveSection] = useState(0);
+  const [navigationRequest, setNavigationRequest] = useState<NavigationRequest | null>(null);
   const [sectionScale, setSectionScale] = useState(1);
   const [layoutTier, setLayoutTier] = useState<LayoutTier>('normal');
   const sectionShellRef = useRef<HTMLDivElement>(null);
   const sectionInnerRef = useRef<HTMLDivElement>(null);
+  const navigationRequestId = useRef(0);
 
   const sectionTopGap = layoutTier === 'micro' ? 56 : layoutTier === 'dense' ? 62 : layoutTier === 'compact' ? 68 : 74;
 
@@ -37,6 +43,15 @@ export default function App() {
       document.documentElement.classList.remove('dark');
     }
   };
+
+  const navigateToSection = useCallback((sectionIndex: number) => {
+    const clampedSection = Math.max(0, Math.min(4, sectionIndex));
+    navigationRequestId.current += 1;
+    setNavigationRequest({
+      sectionIndex: clampedSection,
+      requestId: navigationRequestId.current,
+    });
+  }, []);
 
   const measureSectionScale = useCallback(() => {
     if (activeSection === 0) {
@@ -100,7 +115,7 @@ export default function App() {
     if (activeSection === 0) {
       return (
         <div className="w-screen h-screen overflow-hidden bg-transparent px-4 sm:px-6 md:px-8 flex items-center justify-center pointer-events-auto">
-          <HeroSection />
+          <HeroSection onNavigate={navigateToSection} />
         </div>
       );
     }
@@ -148,13 +163,13 @@ export default function App() {
     <div className="relative w-screen h-screen overflow-hidden bg-background text-foreground transition-colors duration-500 ease-in-out">
       {/* Restore the original Top Navigation UI */}
       <div className="fixed top-0 left-0 w-full z-50 pointer-events-auto">
-        <Navigation theme={theme} onThemeToggle={toggleTheme} />
+        <Navigation theme={theme} onThemeToggle={toggleTheme} onNavigate={navigateToSection} />
       </div>
       
       {/* 3D Scene handles all sections now */}
       <div className="absolute inset-0 z-0">
         <Canvas camera={{ position: [0, 0, 20], fov: 75 }}>
-          <AppScene onActiveSectionChange={setActiveSection} />
+          <AppScene onActiveSectionChange={setActiveSection} navigationRequest={navigationRequest} />
         </Canvas>
       </div>
 

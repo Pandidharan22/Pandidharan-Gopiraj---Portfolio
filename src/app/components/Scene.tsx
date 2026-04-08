@@ -1,13 +1,19 @@
 import * as THREE from 'three';
-import { useRef, useState, useMemo, useEffect } from 'react';
+import { useRef, useState, useMemo, useEffect, useCallback } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { NeuralNetwork } from './NeuralNetwork';
 
-interface SceneProps {
-  onActiveSectionChange?: (sectionIndex: number) => void;
+interface NavigationRequest {
+  sectionIndex: number;
+  requestId: number;
 }
 
-const Scene = ({ onActiveSectionChange }: SceneProps) => {
+interface SceneProps {
+  onActiveSectionChange?: (sectionIndex: number) => void;
+  navigationRequest?: NavigationRequest | null;
+}
+
+const Scene = ({ onActiveSectionChange, navigationRequest }: SceneProps) => {
   const [activeSection, setActiveSection] = useState(0);
   const progress = useRef(0);
   const targetProgress = useRef(0);
@@ -40,6 +46,13 @@ const Scene = ({ onActiveSectionChange }: SceneProps) => {
 
   const sectionCheckpoints = useMemo(() => [0, 0.25, 0.5, 0.75, 1], []);
 
+  const requestSectionTransition = useCallback((nextSection: number) => {
+    const clampedSection = THREE.MathUtils.clamp(nextSection, 0, sectionCheckpoints.length - 1);
+    targetSection.current = clampedSection;
+    targetProgress.current = sectionCheckpoints[clampedSection];
+    isTransitioning.current = Math.abs(progress.current - targetProgress.current) > 0.0003;
+  }, [sectionCheckpoints]);
+
   useEffect(() => {
     const onWheel = (event: WheelEvent) => {
       event.preventDefault();
@@ -54,14 +67,7 @@ const Scene = ({ onActiveSectionChange }: SceneProps) => {
       }
 
       const direction = event.deltaY > 0 ? 1 : -1;
-      targetSection.current = THREE.MathUtils.clamp(
-        targetSection.current + direction,
-        0,
-        sectionCheckpoints.length - 1,
-      );
-
-      targetProgress.current = sectionCheckpoints[targetSection.current];
-      isTransitioning.current = true;
+      requestSectionTransition(targetSection.current + direction);
       lastWheelAt.current = now;
     };
 
@@ -75,7 +81,14 @@ const Scene = ({ onActiveSectionChange }: SceneProps) => {
       window.removeEventListener('wheel', onWheel);
       window.removeEventListener('touchmove', onTouchMove);
     };
-  }, [sectionCheckpoints]);
+  }, [requestSectionTransition, sectionCheckpoints.length]);
+
+  useEffect(() => {
+    if (!navigationRequest) {
+      return;
+    }
+    requestSectionTransition(navigationRequest.sectionIndex);
+  }, [navigationRequest?.requestId, navigationRequest?.sectionIndex, requestSectionTransition]);
 
   useEffect(() => {
     onActiveSectionChange?.(activeSection);
@@ -116,7 +129,7 @@ const Scene = ({ onActiveSectionChange }: SceneProps) => {
   );
 };
 
-export default function AppScene({ onActiveSectionChange }: SceneProps) {
-  return <Scene onActiveSectionChange={onActiveSectionChange} />;
+export default function AppScene({ onActiveSectionChange, navigationRequest }: SceneProps) {
+  return <Scene onActiveSectionChange={onActiveSectionChange} navigationRequest={navigationRequest} />;
 }
 

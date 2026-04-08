@@ -5,14 +5,21 @@ import { motion, AnimatePresence } from 'motion/react';
 interface NavigationProps {
   theme: 'light' | 'dark';
   onThemeToggle: () => void;
+  onNavigate: (sectionIndex: number) => void;
 }
 
-export function Navigation({ theme, onThemeToggle }: NavigationProps) {
+export function Navigation({ theme, onThemeToggle, onNavigate }: NavigationProps) {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    const originalOverflow = document.body.style.overflow;
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
   }, [isMobileMenuOpen]);
 
   useEffect(() => {
@@ -24,10 +31,10 @@ export function Navigation({ theme, onThemeToggle }: NavigationProps) {
   }, []);
 
   const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'About', sectionIndex: 1 },
+    { label: 'Projects', sectionIndex: 2 },
+    { label: 'Skills', sectionIndex: 3 },
+    { label: 'Contact', sectionIndex: 4 },
   ];
 
   return (
@@ -42,20 +49,25 @@ export function Navigation({ theme, onThemeToggle }: NavigationProps) {
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#hero" className="text-xl font-bold text-foreground hover:opacity-70 transition-opacity">
+          <button
+            type="button"
+            onClick={() => onNavigate(0)}
+            className="text-xl font-bold text-foreground hover:opacity-70 transition-opacity"
+          >
             AI Engineer
-          </a>
+          </button>
 
           {/* Nav Links - Hidden on mobile */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.label}
-                href={link.href}
+                type="button"
+                onClick={() => onNavigate(link.sectionIndex)}
                 className="relative text-sm text-foreground/80 hover:text-foreground transition-colors after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-foreground after:transition-all after:duration-300"
               >
                 {link.label}
-              </a>
+              </button>
             ))}
           </div>
 
@@ -116,14 +128,17 @@ export function Navigation({ theme, onThemeToggle }: NavigationProps) {
               </div>
               <div className="flex flex-col gap-6">
                 {navLinks.map((link) => (
-                  <a
+                  <button
                     key={link.label}
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    type="button"
+                    onClick={() => {
+                      onNavigate(link.sectionIndex);
+                      setIsMobileMenuOpen(false);
+                    }}
                     className="text-lg font-medium text-foreground/80 hover:text-foreground transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </button>
                 ))}
 
                 <div className="mt-4 pt-6 border-t border-border">

@@ -1,10 +1,11 @@
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 
-export function HeroSection() {
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
+interface HeroSectionProps {
+  onNavigate?: (sectionIndex: number) => void;
+}
+
+export function HeroSection({ onNavigate }: HeroSectionProps) {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center px-6">
@@ -53,7 +54,8 @@ export function HeroSection() {
             className="flex flex-wrap gap-4 justify-center"
           >
             <button
-              onClick={() => scrollToSection('projects')}
+              type="button"
+              onClick={() => onNavigate?.(2)}
               className="group px-6 sm:px-8 py-3 sm:py-4 bg-foreground text-background border border-transparent rounded-lg hover:bg-background hover:text-foreground hover:border-foreground transition-all duration-300 flex items-center gap-2"
             >
               <span>View Projects</span>
