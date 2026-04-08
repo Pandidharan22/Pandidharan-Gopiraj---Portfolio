@@ -84,8 +84,11 @@ export default function App() {
         </Canvas>
       </div>
 
+      {/* Soft contrast veil keeps text readable while preserving the 3D atmosphere */}
+      <div className="absolute inset-0 z-10 pointer-events-none atmospheric-veil" />
+
       {/* DOM overlay for section content so it never disappears with camera frustum */}
-      <div className="absolute inset-0 z-20 pointer-events-none">
+      <div className="absolute inset-0 z-20 pointer-events-none content-contrast">
         {renderSectionOverlay()}
       </div>
     </div>
