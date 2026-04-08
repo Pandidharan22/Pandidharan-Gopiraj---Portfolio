@@ -23,27 +23,70 @@ export const NeuralNetwork = () => {
 
   // Precompute nodes and edges for performance
   const { nodes, edges } = useMemo(() => {
-    // Utilize Jittered Grid sampling to guarantee perfect spatial uniformity (no empty voids)
+    // Keep the original core distribution, then add an outer shell so the model extends on all axes.
     const nodes: NodeData[] = [];
-    const xSeg = 8, ySeg = 6, zSeg = 12; // Controls density in each axis
-    const width = 120, height = 80, depth = 200; // Overall volume size
+    const xSeg = 8, ySeg = 6, zSeg = 12; // Original core density
+    const width = 120, height = 80, depth = 200; // Original core volume
+    const shellXSeg = 7, shellYSeg = 6, shellZSeg = 12;
+    const shellWidth = 220, shellHeight = 150, shellDepth = 420;
+    const endCapXSeg = 5, endCapYSeg = 4, endCapZSeg = 6; // Dense bands at far ends
     let idCounter = 0;
 
+    const addNode = (px: number, py: number, pz: number) => {
+      nodes.push({
+        id: idCounter++,
+        basePosition: new THREE.Vector3(px, py, pz),
+        timeOffset: Math.random() * 100,
+        opacity: 0.4 + Math.random() * 0.6,
+        scale: 0.05 + Math.random() * 0.03,
+      });
+    };
+
+    // Original core field
     for (let ix = 0; ix < xSeg; ix++) {
       for (let iy = 0; iy < ySeg; iy++) {
         for (let iz = 0; iz < zSeg; iz++) {
-          // Guarantee 1 node per sub-cell, placed randomly within its own cell boundaries
           const px = -width / 2 + (ix + Math.random()) * (width / xSeg);
           const py = -height / 2 + (iy + Math.random()) * (height / ySeg);
           const pz = -depth / 2 + (iz + Math.random()) * (depth / zSeg);
-          
-          nodes.push({
-            id: idCounter++,
-            basePosition: new THREE.Vector3(px, py, pz),
-            timeOffset: Math.random() * 100, // For desynchronized floating animations
-            opacity: 0.4 + Math.random() * 0.6, // Opacity variation
-            scale: 0.05 + Math.random() * 0.03  // Scale variation ~0.05 - 0.08
-          });
+          addNode(px, py, pz);
+        }
+      }
+    }
+
+    // Outer extension shell: adds new nodes at the ends of +X/-X, +Y/-Y, +Z/-Z.
+    for (let ix = 0; ix < shellXSeg; ix++) {
+      for (let iy = 0; iy < shellYSeg; iy++) {
+        for (let iz = 0; iz < shellZSeg; iz++) {
+          const px = -shellWidth / 2 + (ix + Math.random()) * (shellWidth / shellXSeg);
+          const py = -shellHeight / 2 + (iy + Math.random()) * (shellHeight / shellYSeg);
+          const pz = -shellDepth / 2 + (iz + Math.random()) * (shellDepth / shellZSeg);
+
+          const outsideCore =
+            Math.abs(px) > width / 2 + 4 ||
+            Math.abs(py) > height / 2 + 4 ||
+            Math.abs(pz) > depth / 2 + 6;
+
+          if (outsideCore) {
+            addNode(px, py, pz);
+          }
+        }
+      }
+    }
+
+    // Extra dense end-caps on +/-Z so Skills/Contact regions remain richly connected.
+    const zCapMin = depth / 2 + 6;
+    const zCapSpan = shellDepth / 2 - zCapMin;
+    for (const side of [-1, 1]) {
+      for (let ix = 0; ix < endCapXSeg; ix++) {
+        for (let iy = 0; iy < endCapYSeg; iy++) {
+          for (let iz = 0; iz < endCapZSeg; iz++) {
+            const px = -shellWidth / 2 + (ix + Math.random()) * (shellWidth / endCapXSeg);
+            const py = -shellHeight / 2 + (iy + Math.random()) * (shellHeight / endCapYSeg);
+            const pzAbs = zCapMin + (iz + Math.random()) * (zCapSpan / endCapZSeg);
+            const pz = side * pzAbs;
+            addNode(px, py, pz);
+          }
         }
       }
     }
@@ -88,8 +131,15 @@ export const NeuralNetwork = () => {
         .filter((d) => d.idx !== i)
         .sort((a, b) => a.dist - b.dist); // Sort by nearest
 
-      // Connect to 5 nearest neighbors to create highly dense webbing
-      for (let k = 0; k < 5; k++) {
+      const isOuterNode =
+        Math.abs(nodeA.basePosition.x) > width / 2 + 10 ||
+        Math.abs(nodeA.basePosition.y) > height / 2 + 10 ||
+        Math.abs(nodeA.basePosition.z) > depth / 2 + 10;
+
+      // Slightly denser connectivity in the outer shell/end-caps.
+      const neighborsToConnect = isOuterNode ? 7 : 5;
+
+      for (let k = 0; k < neighborsToConnect; k++) {
         const targetIdx = distances[k].idx;
         const edgeExists = edges.some(e => 
           (e.source === i && e.target === targetIdx) || 
@@ -109,7 +159,7 @@ export const NeuralNetwork = () => {
     const colors = new Float32Array(edges.length * 6);
     edges.forEach((edge, i) => {
       // Base edge opacity/intensity on distance; mapped to new massive spreads
-      const intensity = Math.max(0.05, 0.8 - (edge.distance / 25)); 
+      const intensity = Math.max(0.08, 0.85 - (edge.distance / 30)); 
       // Set RGB values to fake opacity with vertex colors
       colors.set([intensity, intensity, intensity, intensity, intensity, intensity], i * 6);
     });
@@ -182,7 +232,7 @@ export const NeuralNetwork = () => {
           />
         </bufferGeometry>
         {/* Uses vertex colors to simulate dynamic opacity per line segment */}
-        <lineBasicMaterial vertexColors transparent opacity={0.5} />
+        <lineBasicMaterial vertexColors transparent opacity={0.58} />
       </lineSegments>
 
       {/* Node System */}

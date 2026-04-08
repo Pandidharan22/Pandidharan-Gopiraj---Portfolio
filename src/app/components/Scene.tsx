@@ -13,6 +13,7 @@ const Scene = ({ onActiveSectionChange }: SceneProps) => {
   const targetProgress = useRef(0);
   const targetSection = useRef(0);
   const lastWheelAt = useRef(0);
+  const isTransitioning = useRef(false);
   const lookAtTarget = useMemo(() => new THREE.Vector3(), []);
 
   const sectionAnchors = useMemo(() => [
@@ -44,7 +45,11 @@ const Scene = ({ onActiveSectionChange }: SceneProps) => {
       event.preventDefault();
       const now = performance.now();
       // Throttle wheel input and avoid jumping while a transition is still in-flight.
-      if (now - lastWheelAt.current < 700 || Math.abs(progress.current - targetProgress.current) > 0.003) {
+      if (
+        now - lastWheelAt.current < 700 ||
+        isTransitioning.current ||
+        Math.abs(progress.current - targetProgress.current) > 0.003
+      ) {
         return;
       }
 
@@ -56,6 +61,7 @@ const Scene = ({ onActiveSectionChange }: SceneProps) => {
       );
 
       targetProgress.current = sectionCheckpoints[targetSection.current];
+      isTransitioning.current = true;
       lastWheelAt.current = now;
     };
 
@@ -80,6 +86,7 @@ const Scene = ({ onActiveSectionChange }: SceneProps) => {
     progress.current = THREE.MathUtils.lerp(progress.current, targetProgress.current, 0.055);
     if (Math.abs(progress.current - targetProgress.current) < 0.0003) {
       progress.current = targetProgress.current;
+      isTransitioning.current = false;
     }
 
     // Switch visible section only near the end of travel to avoid hard snaps.
