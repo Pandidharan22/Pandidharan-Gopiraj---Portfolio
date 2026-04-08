@@ -58,7 +58,7 @@ export function ContactSection() {
                 animate={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`group p-6 rounded-xl bg-surface border border-border hover:border-foreground transition-all duration-300 hover:shadow-xl hover:shadow-black/5 dark:shadow-white/5 ${link.color}`}
+                className={`group p-6 rounded-xl bg-surface/50 border border-border hover:border-foreground transition-all duration-300 hover:shadow-xl hover:shadow-black/5 dark:shadow-white/5 ${link.color}`}
               >
                 <link.icon className="w-8 h-8 mx-auto mb-4 transition-transform group-hover:scale-110" />
                 <h3 className="font-semibold mb-2">{link.label}</h3>

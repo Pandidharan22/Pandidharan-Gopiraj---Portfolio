@@ -27,7 +27,6 @@ export function Navigation({ theme, onThemeToggle }: NavigationProps) {
     { label: 'About', href: '#about' },
     { label: 'Projects', href: '#projects' },
     { label: 'Skills', href: '#skills' },
-    { label: 'Insights', href: '#insights' },
     { label: 'Contact', href: '#contact' },
   ];
 

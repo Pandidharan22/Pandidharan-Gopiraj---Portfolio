@@ -68,7 +68,7 @@ export function ProjectsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               onClick={() => setSelectedProject(project)}
-              className="group cursor-pointer p-6 rounded-xl bg-surface border border-border hover:border-foreground transition-all duration-300 hover:shadow-2xl hover:shadow-black/5 dark:shadow-white/5 hover:scale-[1.02]"
+              className="group cursor-pointer p-6 rounded-xl bg-surface/50 border border-border hover:border-foreground transition-all duration-300 hover:shadow-2xl hover:shadow-black/5 dark:shadow-white/5 hover:scale-[1.02]"
             >
               <h3 className="text-xl font-semibold mb-3 group-hover:text-foreground font-semibold transition-colors">
                 {project.title}
@@ -110,10 +110,10 @@ export function ProjectsSection() {
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: 'spring', damping: 25 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-surface rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-border shadow-2xl"
+              className="bg-surface/50 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-border shadow-2xl"
             >
               {/* Header */}
-              <div className="sticky top-0 bg-surface border-b border-border p-6 flex items-start justify-between">
+              <div className="sticky top-0 bg-surface/50 border-b border-border p-6 flex items-start justify-between">
                 <div className="flex-1">
                   <h3 className="text-2xl md:text-3xl font-bold mb-3">{selectedProject.title}</h3>
                   <div className="flex flex-wrap gap-2">
@@ -183,7 +183,7 @@ export function ProjectsSection() {
                     {selectedProject.results.map((result, index) => (
                       <div
                         key={index}
-                        className="p-4 rounded-lg bg-surface border border-border"
+                        className="p-4 rounded-lg bg-surface/50 border border-border"
                       >
                         <p className="text-sm font-medium text-foreground/80">{result}</p>
                       </div>

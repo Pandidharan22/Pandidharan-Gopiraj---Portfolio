@@ -96,7 +96,7 @@ export function AboutSection() {
                 animate={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-                className="p-6 rounded-lg bg-surface border border-border hover:border-foreground/50 transition-all hover:shadow-lg hover:shadow-black/5 dark:shadow-white/5"
+                className="p-6 rounded-lg bg-surface/50 border border-border hover:border-foreground/50 transition-all hover:shadow-lg hover:shadow-black/5 dark:shadow-white/5"
               >
                 <h4 className="font-semibold mb-3 text-foreground font-semibold">{item.title}</h4>
                 <p className="text-sm text-foreground/70">{item.description}</p>

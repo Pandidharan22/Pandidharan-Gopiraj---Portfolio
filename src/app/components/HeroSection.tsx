@@ -20,7 +20,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 text-foreground"
+            className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 text-foreground hero-title-glow"
           >
             Pandidharan Gopiraj
           </motion.h1>
@@ -30,7 +30,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg sm:text-xl md:text-2xl text-foreground/80 mb-4 sm:mb-6 font-medium"
+            className="text-lg sm:text-xl md:text-2xl text-foreground mb-4 sm:mb-6 font-semibold hero-role-glow"
           >
             AI Engineer | ML Engineer | Data Analyst
           </motion.div>
@@ -40,7 +40,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-base sm:text-lg md:text-xl text-foreground/70 mb-8 sm:mb-12 max-w-3xl leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-foreground mb-8 sm:mb-12 max-w-3xl leading-relaxed font-medium hero-tagline-glow"
           >
             Designing AI systems that don't just predict — they validate, adapt, and self-heal.
           </motion.p>
@@ -58,12 +58,6 @@ export function HeroSection() {
             >
               <span>View Projects</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button
-              onClick={() => scrollToSection('insights')}
-              className="px-6 sm:px-8 py-3 sm:py-4 border border-border text-foreground rounded-lg hover:bg-foreground hover:text-background transition-all duration-300"
-            >
-              Explore Insights
             </button>
           </motion.div>
         </motion.div>
