@@ -43,7 +43,8 @@ const Scene = ({ onActiveSectionChange }: SceneProps) => {
     const onWheel = (event: WheelEvent) => {
       event.preventDefault();
       const now = performance.now();
-      if (now - lastWheelAt.current < 420) {
+      // Throttle wheel input and avoid jumping while a transition is still in-flight.
+      if (now - lastWheelAt.current < 700 || Math.abs(progress.current - targetProgress.current) > 0.003) {
         return;
       }
 
@@ -55,7 +56,6 @@ const Scene = ({ onActiveSectionChange }: SceneProps) => {
       );
 
       targetProgress.current = sectionCheckpoints[targetSection.current];
-      setActiveSection(targetSection.current);
       lastWheelAt.current = now;
     };
 
@@ -76,24 +76,29 @@ const Scene = ({ onActiveSectionChange }: SceneProps) => {
   }, [activeSection, onActiveSectionChange]);
 
   useFrame((state) => {
-    // Smooth the input to keep camera motion cinematic.
-    progress.current = THREE.MathUtils.lerp(progress.current, targetProgress.current, 0.1);
-    if (Math.abs(progress.current - targetProgress.current) < 0.0008) {
+    // Smooth the input to keep camera motion cinematic and breathable.
+    progress.current = THREE.MathUtils.lerp(progress.current, targetProgress.current, 0.055);
+    if (Math.abs(progress.current - targetProgress.current) < 0.0003) {
       progress.current = targetProgress.current;
+    }
+
+    // Switch visible section only near the end of travel to avoid hard snaps.
+    if (Math.abs(progress.current - targetProgress.current) < 0.02) {
+      setActiveSection((prev) => (prev === targetSection.current ? prev : targetSection.current));
     }
 
     // Determine where we should be on the curve (0 to 1) based on wheel progress.
     const pathPosition = cameraCurve.getPoint(progress.current);
     
     // Look slightly ahead of us on the curve (5% ahead) avoiding bound crashes (0.99 max)
-    const lookAhead = Math.min(0.995, progress.current + 0.02);
+    const lookAhead = Math.min(0.995, progress.current + 0.015);
     const pathLookAt = lookCurve.getPoint(lookAhead);
 
     // Smoothly interpolate camera position directly along the 3D track
-    state.camera.position.lerp(pathPosition, 0.12);
+    state.camera.position.lerp(pathPosition, 0.07);
     
     // Smoothly move the target the camera is looking at
-    lookAtTarget.lerp(pathLookAt, 0.1);
+    lookAtTarget.lerp(pathLookAt, 0.06);
     state.camera.lookAt(lookAtTarget);
   });
 
