@@ -45,6 +45,176 @@ body {
   text-shadow: 0 1px 14px rgba(0, 0, 0, 0.62);
 }
 
+.section-fit-shell {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.section-fit-inner {
+  width: 100%;
+  transform-origin: top center;
+  transition: transform 280ms ease;
+  will-change: transform;
+}
+
+.layout-compact section {
+  padding-top: 4rem !important;
+  padding-bottom: 3.1rem !important;
+}
+
+.layout-compact .mb-12 {
+  margin-bottom: 1.5rem !important;
+}
+
+.layout-compact .mt-16 {
+  margin-top: 1.4rem !important;
+}
+
+.layout-dense section,
+.layout-micro section {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2rem !important;
+}
+
+.layout-dense h2,
+.layout-micro h2 {
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem) !important;
+  line-height: 1.08 !important;
+}
+
+.layout-dense h3,
+.layout-micro h3 {
+  font-size: clamp(1.08rem, 2.2vw, 1.45rem) !important;
+  line-height: 1.18 !important;
+}
+
+.layout-dense p,
+.layout-dense li,
+.layout-dense span,
+.layout-dense a,
+.layout-dense button,
+.layout-micro p,
+.layout-micro li,
+.layout-micro span,
+.layout-micro a,
+.layout-micro button {
+  line-height: 1.34 !important;
+}
+
+.layout-dense .mb-12,
+.layout-micro .mb-12 {
+  margin-bottom: 1rem !important;
+}
+
+.layout-dense .mt-16,
+.layout-micro .mt-16 {
+  margin-top: 0.9rem !important;
+}
+
+.layout-dense .gap-12,
+.layout-dense .lg\:gap-16,
+.layout-dense .gap-6,
+.layout-dense .gap-4,
+.layout-micro .gap-12,
+.layout-micro .lg\:gap-16,
+.layout-micro .gap-6,
+.layout-micro .gap-4 {
+  gap: 0.7rem !important;
+}
+
+/* Section-specific tuning */
+.section-about.layout-dense p,
+.section-about.layout-micro p {
+  font-size: clamp(0.88rem, 1.45vw, 1rem) !important;
+}
+
+.section-about.layout-dense .p-6,
+.section-about.layout-micro .p-6 {
+  padding: 0.8rem !important;
+}
+
+.section-about.layout-micro .mb-8 {
+  margin-bottom: 0.55rem !important;
+}
+
+.section-about.layout-micro .grid.md\:grid-cols-2 {
+  gap: 0.55rem !important;
+}
+
+.section-about.layout-micro .grid.md\:grid-cols-3 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.section-about.layout-micro .grid.md\:grid-cols-3 > :last-child {
+  grid-column: 1 / -1;
+}
+
+.section-about.layout-micro .text-sm.text-foreground\/70 {
+  font-size: 0.82rem !important;
+  line-height: 1.22 !important;
+}
+
+.section-skills.layout-dense .rounded-lg,
+.section-skills.layout-micro .rounded-lg {
+  padding: 0.36rem 0.58rem !important;
+}
+
+.section-skills.layout-dense h3,
+.section-skills.layout-micro h3 {
+  margin-bottom: 0.4rem !important;
+}
+
+.section-skills.layout-micro .space-y-12 {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem !important;
+}
+
+.section-skills.layout-micro .space-y-12 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 0 !important;
+}
+
+.section-skills.layout-micro .space-y-12 .flex.flex-wrap {
+  gap: 0.35rem !important;
+}
+
+.section-skills.layout-micro .space-y-12 .text-sm {
+  font-size: 0.78rem !important;
+  line-height: 1.14 !important;
+}
+
+.section-skills.layout-micro .mt-16.p-8.rounded-xl {
+  display: none !important;
+}
+
+.section-contact.layout-dense .p-6,
+.section-contact.layout-micro .p-6 {
+  padding: 0.85rem !important;
+}
+
+.section-contact.layout-dense .mt-24,
+.section-contact.layout-micro .mt-24 {
+  margin-top: 1rem !important;
+  padding-top: 0.75rem !important;
+}
+
+@media (max-width: 768px), (max-height: 560px) {
+  .section-fit-shell {
+    padding-left: 0.65rem !important;
+    padding-right: 0.65rem !important;
+  }
+
+  .layout-micro p,
+  .layout-micro li,
+  .layout-micro span,
+  .layout-micro a,
+  .layout-micro button {
+    font-size: clamp(0.82rem, 2.2vw, 0.94rem) !important;
+    line-height: 1.28 !important;
+  }
+}
+
 /* ScrollControls uses this target, we can allow its inner divs to scroll */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;

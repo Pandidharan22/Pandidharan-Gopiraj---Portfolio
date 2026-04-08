@@ -20,7 +20,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-5xl md:text-7xl font-bold mb-6 text-foreground"
+            className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 text-foreground"
           >
             Pandidharan Gopiraj
           </motion.h1>
@@ -30,7 +30,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-foreground/80 mb-6 font-medium"
+            className="text-lg sm:text-xl md:text-2xl text-foreground/80 mb-4 sm:mb-6 font-medium"
           >
             AI Engineer | ML Engineer | Data Analyst
           </motion.div>
@@ -40,7 +40,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-lg md:text-xl text-foreground/70 mb-12 max-w-3xl leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-foreground/70 mb-8 sm:mb-12 max-w-3xl leading-relaxed"
           >
             Designing AI systems that don't just predict — they validate, adapt, and self-heal.
           </motion.p>
@@ -54,14 +54,14 @@ export function HeroSection() {
           >
             <button
               onClick={() => scrollToSection('projects')}
-              className="group px-8 py-4 bg-foreground text-background border border-transparent rounded-lg hover:bg-background hover:text-foreground hover:border-foreground transition-all duration-300 flex items-center gap-2"
+              className="group px-6 sm:px-8 py-3 sm:py-4 bg-foreground text-background border border-transparent rounded-lg hover:bg-background hover:text-foreground hover:border-foreground transition-all duration-300 flex items-center gap-2"
             >
               <span>View Projects</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
             <button
               onClick={() => scrollToSection('insights')}
-              className="px-8 py-4 border border-border text-foreground rounded-lg hover:bg-foreground hover:text-background transition-all duration-300"
+              className="px-6 sm:px-8 py-3 sm:py-4 border border-border text-foreground rounded-lg hover:bg-foreground hover:text-background transition-all duration-300"
             >
               Explore Insights
             </button>

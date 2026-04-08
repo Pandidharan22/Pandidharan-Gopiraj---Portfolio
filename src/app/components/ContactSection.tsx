@@ -42,7 +42,7 @@ export function ContactSection() {
           <p className="text-xl md:text-2xl text-foreground/80 mb-4 font-medium">
             Let's build something impactful.
           </p>
-          <p className="text-lg text-foreground/70 mb-12">
+          <p className="text-base md:text-lg text-foreground/70 mb-10 md:mb-12">
             I'm always interested in discussing new projects, opportunities, or collaborations in AI and machine learning.
           </p>
 

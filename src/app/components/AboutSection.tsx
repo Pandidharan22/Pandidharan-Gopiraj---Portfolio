@@ -45,10 +45,10 @@ export function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <p className="text-lg text-foreground/80 leading-relaxed mb-8">
+            <p className="text-base md:text-lg text-foreground/80 leading-relaxed mb-6 md:mb-8">
               I'm an AI Engineer specializing in building production-ready machine learning systems that solve real-world problems. With expertise spanning from NLP to predictive modeling, I focus on creating AI solutions that are not only accurate but also reliable, scalable, and maintainable.
             </p>
-            <p className="text-lg text-foreground/80 leading-relaxed">
+            <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
               My approach combines deep technical knowledge with systems thinking, ensuring that every model I deploy is part of a robust, self-monitoring infrastructure designed for long-term success.
             </p>
           </motion.div>

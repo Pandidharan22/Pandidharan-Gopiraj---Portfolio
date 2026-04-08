@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Canvas } from '@react-three/fiber';
 import AppScene from './components/Scene';
 import { Navigation } from './components/Navigation';
@@ -8,9 +8,17 @@ import { ProjectsSection } from './components/ProjectsSection';
 import { SkillsSection } from './components/SkillsSection';
 import { ContactSection } from './components/ContactSection';
 
+type LayoutTier = 'normal' | 'compact' | 'dense' | 'micro';
+
 export default function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [activeSection, setActiveSection] = useState(0);
+  const [sectionScale, setSectionScale] = useState(1);
+  const [layoutTier, setLayoutTier] = useState<LayoutTier>('normal');
+  const sectionShellRef = useRef<HTMLDivElement>(null);
+  const sectionInnerRef = useRef<HTMLDivElement>(null);
+
+  const sectionTopGap = layoutTier === 'micro' ? 56 : layoutTier === 'dense' ? 62 : layoutTier === 'compact' ? 68 : 74;
 
   useEffect(() => {
     // Restore dark mode functionality
@@ -30,7 +38,65 @@ export default function App() {
     }
   };
 
+  const measureSectionScale = useCallback(() => {
+    if (activeSection === 0) {
+      setSectionScale(1);
+      setLayoutTier('normal');
+      return;
+    }
+
+    const shell = sectionShellRef.current;
+    const inner = sectionInnerRef.current;
+    if (!shell || !inner) {
+      return;
+    }
+
+    const sectionEl = inner.querySelector('section') as HTMLElement | null;
+
+    const availableHeight = shell.clientHeight;
+    const availableWidth = shell.clientWidth;
+    const contentHeight = sectionEl?.scrollHeight ?? inner.scrollHeight;
+    const contentWidth = sectionEl?.scrollWidth ?? inner.scrollWidth;
+
+    let nextTier: LayoutTier = 'normal';
+    if (availableHeight < 540 || (availableWidth < 430 && availableHeight < 900)) {
+      nextTier = 'micro';
+    } else if (availableHeight < 680 || availableWidth < 520) {
+      nextTier = 'dense';
+    } else if (availableHeight < 860 || availableWidth < 760) {
+      nextTier = 'compact';
+    }
+    setLayoutTier(nextTier);
+
+    const scaleY = Math.max(1, availableHeight - sectionTopGap) / Math.max(1, contentHeight);
+    const scaleX = availableWidth / Math.max(1, contentWidth);
+    const nextScale = Math.min(1, scaleX, scaleY) * 0.995;
+
+    // Always fit (no clipping), while layout tiers keep text as readable as possible.
+    setSectionScale(Math.max(0.2, Math.min(1, nextScale)));
+  }, [activeSection, sectionTopGap]);
+
+  useEffect(() => {
+    const raf = requestAnimationFrame(measureSectionScale);
+    window.addEventListener('resize', measureSectionScale);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', measureSectionScale);
+    };
+  }, [measureSectionScale]);
+
   const renderSectionOverlay = () => {
+    const sectionKey =
+      activeSection === 1
+        ? 'about'
+        : activeSection === 2
+          ? 'projects'
+          : activeSection === 3
+            ? 'skills'
+            : 'contact';
+    const sectionShellClasses = `w-screen h-screen overflow-hidden bg-transparent px-4 sm:px-6 md:px-8 pointer-events-auto section-fit-shell section-${sectionKey} layout-${layoutTier}`;
+    const sectionShellStyle = { paddingTop: `${sectionTopGap}px` };
+
     if (activeSection === 0) {
       return (
         <div className="w-screen h-screen overflow-hidden bg-transparent px-4 sm:px-6 md:px-8 flex items-center justify-center pointer-events-auto">
@@ -41,31 +107,39 @@ export default function App() {
 
     if (activeSection === 1) {
       return (
-        <div className="w-screen h-screen overflow-hidden bg-transparent px-4 sm:px-6 md:px-8 pointer-events-auto">
-          <AboutSection />
+        <div ref={sectionShellRef} className={sectionShellClasses} style={sectionShellStyle}>
+          <div ref={sectionInnerRef} className="section-fit-inner" style={{ transform: `scale(${sectionScale})` }}>
+            <AboutSection />
+          </div>
         </div>
       );
     }
 
     if (activeSection === 2) {
       return (
-        <div className="w-screen h-screen overflow-hidden bg-transparent px-4 sm:px-6 md:px-8 pointer-events-auto">
-          <ProjectsSection />
+        <div ref={sectionShellRef} className={sectionShellClasses} style={sectionShellStyle}>
+          <div ref={sectionInnerRef} className="section-fit-inner" style={{ transform: `scale(${sectionScale})` }}>
+            <ProjectsSection />
+          </div>
         </div>
       );
     }
 
     if (activeSection === 3) {
       return (
-        <div className="w-screen h-screen overflow-hidden bg-transparent px-4 sm:px-6 md:px-8 pointer-events-auto">
-          <SkillsSection />
+        <div ref={sectionShellRef} className={sectionShellClasses} style={sectionShellStyle}>
+          <div ref={sectionInnerRef} className="section-fit-inner" style={{ transform: `scale(${sectionScale})` }}>
+            <SkillsSection />
+          </div>
         </div>
       );
     }
 
     return (
-      <div className="w-screen h-screen overflow-hidden bg-transparent px-4 sm:px-6 md:px-8 pointer-events-auto">
-        <ContactSection />
+      <div ref={sectionShellRef} className={sectionShellClasses} style={sectionShellStyle}>
+        <div ref={sectionInnerRef} className="section-fit-inner" style={{ transform: `scale(${sectionScale})` }}>
+          <ContactSection />
+        </div>
       </div>
     );
   };
