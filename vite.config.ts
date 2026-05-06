@@ -22,7 +22,7 @@ export default defineConfig({
 
   server: {
     allowedHosts: [
-      'tobacco-bruce-klein-shots.trycloudflare.com'
+      'zealand-economy-libraries-mortgages.trycloudflare.com'
     ]
-  }
+  
 })

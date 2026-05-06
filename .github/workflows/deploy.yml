@@ -1,0 +1,33 @@
+name: Automated Homelab Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Standard stable version for React 3D
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Production Files
+        run: npm run build
+
+      - name: Deploy to Nginx Bind Mount
+        run: |
+          # 1. Clear out the old portfolio files to prevent stale data
+          Remove-Item -Path "D:\Projects\Nexus---Personal-Cloud-and-Automated-Portfolio-Homelab\portfolio-data\*" -Recurse -Force -ErrorAction SilentlyContinue
+          
+          # 2. Copy the fresh build directly into the local homelab storage
+          Copy-Item -Path "dist\*" -Destination "D:\Projects\Nexus---Personal-Cloud-and-Automated-Portfolio-Homelab\portfolio-data\" -Recurse -Force
