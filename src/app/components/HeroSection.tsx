@@ -14,7 +14,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="max-w-4xl mx-auto text-center"
+          className="max-w-5xl mx-auto text-center"
         >
           {/* Name */}
           <motion.h1
@@ -33,7 +33,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-lg sm:text-xl md:text-2xl text-foreground mb-4 sm:mb-6 font-semibold hero-role-glow"
           >
-            AI Engineer | ML Engineer | Data Analyst
+            AI Engineer | Software Developer
           </motion.div>
 
           {/* Tagline */}
@@ -41,9 +41,9 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-base sm:text-lg md:text-xl text-foreground mb-8 sm:mb-12 max-w-3xl leading-relaxed font-medium hero-tagline-glow"
+            className="text-base sm:text-lg md:text-xl text-foreground mb-8 sm:mb-12 max-w-content mx-auto lg:whitespace-nowrap leading-relaxed font-medium hero-tagline-glow"
           >
-            Designing AI systems that don't just predict — they validate, adapt, and self-heal.
+            Bridging the gap between advanced AI models and production-ready web infrastructure.
           </motion.p>
 
           {/* CTA Buttons */}
