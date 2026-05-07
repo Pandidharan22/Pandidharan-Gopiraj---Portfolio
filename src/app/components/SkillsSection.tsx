@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 
 interface Skill {
   name: string;
-  category: 'ai-ml' | 'data-engineering' | 'backend-systems' | 'tools';
+  category: 'ai-ml' | 'data-engineering' | 'backend-systems' | 'frontend' | 'devops-tools';
 }
 
 const skills: Skill[] = [
@@ -11,14 +11,13 @@ const skills: Skill[] = [
   { name: 'Agentic AI', category: 'ai-ml' },
   { name: 'PyTorch', category: 'ai-ml' },
   { name: 'Scikit-learn', category: 'ai-ml' },
-  { name: 'BERT', category: 'ai-ml' },
-  { name: 'LLaMA', category: 'ai-ml' },
-  { name: 'GPT', category: 'ai-ml' },
   { name: 'Hugging Face', category: 'ai-ml' },
   { name: 'LangChain', category: 'ai-ml' },
-  { name: 'Computer Vision', category: 'ai-ml' },
+  { name: 'RAG', category: 'ai-ml' },
+  { name: 'LLMOps', category: 'ai-ml' },
+  { name: 'SHAP', category: 'ai-ml' },
+  { name: 'FAISS', category: 'ai-ml' },
   { name: 'NLP', category: 'ai-ml' },
-  { name: 'Time Series', category: 'ai-ml' },
   
   // Data Engineering
   { name: 'SQL', category: 'data-engineering' },
@@ -29,20 +28,33 @@ const skills: Skill[] = [
   
   // Backend / Systems
   { name: 'FastAPI', category: 'backend-systems' },
+  { name: 'Nginx', category: 'backend-systems' },
+  { name: 'Nextcloud', category: 'backend-systems' },
+
+  // Frontend
+  { name: 'React', category: 'frontend' },
+  { name: 'Three.js', category: 'frontend' },
+  { name: 'Tailwind CSS', category: 'frontend' },
+  { name: 'Framer Motion', category: 'frontend' },
+  { name: 'Streamlit', category: 'frontend' },
   
-  // Tools
-  { name: 'Git', category: 'tools' },
-  { name: 'Docker', category: 'tools' },
-  { name: 'CI/CD Pipelines', category: 'tools' },
-  { name: 'Jupyter', category: 'tools' },
-  { name: 'Linux', category: 'tools' },
+  // DevOps & Tools
+  { name: 'Git', category: 'devops-tools' },
+  { name: 'Docker', category: 'devops-tools' },
+  { name: 'CI/CD Pipelines', category: 'devops-tools' },
+  { name: 'GitHub Actions', category: 'devops-tools' },
+  { name: 'Cloudflare Zero Trust', category: 'devops-tools' },
+  { name: 'Linux', category: 'devops-tools' },
+  { name: 'WSL2', category: 'devops-tools' },
+  { name: 'Jupyter', category: 'devops-tools' },
 ];
 
 const categories = [
-  { id: 'ai-ml', label: 'AI / ML', color: 'from-blue-500 to-cyan-500' },
+  { id: 'ai-ml', label: 'AI & Machine Learning', color: 'from-blue-500 to-cyan-500' },
   { id: 'data-engineering', label: 'Data Engineering', color: 'from-purple-500 to-pink-500' },
-  { id: 'backend-systems', label: 'Backend / Systems', color: 'from-green-500 to-emerald-500' },
-  { id: 'tools', label: 'Tools', color: 'from-orange-500 to-yellow-500' },
+  { id: 'backend-systems', label: 'Backend & Systems', color: 'from-green-500 to-emerald-500' },
+  { id: 'frontend', label: 'Frontend Development', color: 'from-yellow-400 to-orange-500' },
+  { id: 'devops-tools', label: 'DevOps & Tools', color: 'from-red-500 to-rose-500' },
 ];
 
 export function SkillsSection() {
