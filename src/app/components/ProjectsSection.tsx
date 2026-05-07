@@ -15,6 +15,7 @@ interface Project {
   researchFocus?: string;
   demoLink?: string;
   demoLinkLabel?: string;
+  demoNote?: string;
   githubLink?: string;
 }
 
@@ -45,6 +46,32 @@ const projects: Project[] = [
     researchFocus: 'This project is a research-oriented MVP exploring reliability engineering for Retrieval-Augmented Generation (RAG) systems through deterministic validation, observability, and autonomous recovery mechanisms.',
     demoLink: 'https://github.com/Pandidharan22/Final-Year-Major-Project',
     githubLink: 'https://github.com/Pandidharan22/Final-Year-Major-Project',
+  },
+  {
+    id: 'project-nexus',
+    title: 'Project Nexus — Personal Cloud & Automated Portfolio Homelab',
+    impact: 'Engineered a production-grade self-hosted homelab infrastructure combining a secure private cloud platform and an automated deployment server. Note: This very portfolio is hosted directly on this Nexus infrastructure running on my laptop!',
+    tags: ['Docker', 'Cloudflare Zero Trust', 'Nextcloud', 'Nginx', 'GitHub Actions', 'WSL2'],
+    problem: 'Traditional self-hosting requires exposing local network ports to the internet, creating significant security risks. The goal was to build a dual-purpose server architecture on a local Windows machine providing secure global access to self-hosted services without exposing local machine ports.',
+    approach: 'Implemented a Zero-Surface-Area security architecture using outbound-only encrypted Cloudflare Tunnel routing. Designed a fully containerized infrastructure with Docker Compose, handling both a private Nextcloud instance and an automated CI/CD pipeline for a real-time Nginx web server.',
+    features: [
+      'Zero-Surface-Area security architecture with no open inbound ports',
+      'Outbound-only encrypted Cloudflare Tunnel routing',
+      'Self-hosted cloud storage platform using Nextcloud and MariaDB',
+      'High-performance Nginx static hosting optimized for heavy 3D frontend workloads',
+      'Automated build and deployment pipeline triggered via GitHub Actions self-hosted runner',
+      'Fully containerized infrastructure using Docker Compose with isolated service architecture',
+      'Docker bind mounts for direct physical disk ownership and data sovereignty'
+    ],
+    results: [
+      'Demonstrates practical DevOps, self-hosting, networking, and infrastructure engineering skills',
+      'Built a secure alternative to traditional cloud storage platforms with full data ownership',
+      'Eliminated dependency on exposed router ports through Zero Trust tunneling architecture',
+      'Established a production-style CI/CD workflow for automated frontend deployment',
+      'Currently hosting this React Three Fiber 3D portfolio reliably using optimized static asset serving'
+    ],
+    githubLink: 'https://github.com/Pandidharan22/Nexus---Personal-Cloud-and-Automated-Portfolio-Homelab',
+    demoNote: '✨ Live Demo? You are looking at it! This portfolio is hosted on Nexus.',
   },
   {
     id: 'lokesh-portfolio',
@@ -221,7 +248,7 @@ export function ProjectsSection() {
             )}
 
             {/* Links */}
-            <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex flex-wrap items-center gap-4 pt-4">
               {selectedProject.demoLink && (
                 <a
                   href={selectedProject.demoLink}
@@ -243,6 +270,11 @@ export function ProjectsSection() {
                   <Github className="w-4 h-4" />
                   <span>View Code</span>
                 </a>
+              )}
+              {selectedProject.demoNote && (
+                <p className="text-sm font-medium italic text-foreground/80 px-2 transition-all duration-300 hover:text-foreground hover:[text-shadow:0_0_8px_currentColor] cursor-default">
+                  {selectedProject.demoNote}
+                </p>
               )}
             </div>
           </div>
