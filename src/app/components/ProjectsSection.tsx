@@ -71,6 +71,33 @@ const projects: Project[] = [
     demoLinkLabel: 'View Portfolio',
     githubLink: 'https://github.com/Pandidharan22/Lokesh-Photographer-Portfolio',
   },
+  {
+    id: 'loan-risk-scoring',
+    title: 'AI-Powered Loan Eligibility & Risk Scoring System',
+    impact: 'Built a production-grade end-to-end machine learning system for loan default risk prediction with a deployed FastAPI backend, real-time inference pipeline, and integrated frontend UI for financial risk assessment.',
+    tags: ['Python', 'FastAPI', 'Scikit-learn', 'SHAP', 'Docker', 'Hugging Face'],
+    problem: 'Traditional loan approval systems often struggle with imbalanced datasets where default cases are rare, causing models to achieve misleadingly high accuracy while failing to identify high-risk applicants effectively.',
+    approach: 'Designed a complete ML engineering pipeline focused on imbalanced binary classification, advanced feature engineering, threshold optimization, interpretability, and production deployment for real-time inference.',
+    features: [
+      'Advanced feature engineering for low-signal financial datasets',
+      'Imbalanced classification handling using class weights and threshold tuning',
+      'Production-ready FastAPI backend with modular service architecture',
+      'Real-time prediction API with integrated frontend interface',
+      'SHAP-based model interpretability and feature contribution analysis',
+      'End-to-end preprocessing pipeline with serialized inference workflow',
+      'Dockerized deployment on Hugging Face Spaces',
+      'Structured ML system architecture with reusable preprocessing and prediction services'
+    ],
+    results: [
+      'Achieved ROC-AUC of ~0.75, F1 Score ~0.36, Precision ~0.32, Recall ~0.41 with optimized decision threshold at 0.20',
+      'Improved minority-class detection significantly through threshold tuning and recall optimization',
+      'Demonstrated that feature engineering had greater impact than model complexity in low-signal datasets (selected Gradient Boosting)',
+      'Fully deployed ML system with real-time inference support on Hugging Face Spaces',
+      'Built a scalable inference workflow separating preprocessing, prediction services, and API layers'
+    ],
+    demoLink: 'https://huggingface.co/spaces/Pandidharan22/loan-risk-scoring-api',
+    githubLink: 'https://github.com/Pandidharan22/AI-Powered-Loan-Eligibility-Risk-Scoring-System-API',
+  },
 ];
 
 export function ProjectsSection() {
