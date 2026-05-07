@@ -1,26 +1,26 @@
 import { motion } from 'motion/react';
-import { Brain, Database, Cpu, TrendingUp } from 'lucide-react';
+import { Brain, Database, Cpu, TrendingUp, Server, Layout } from 'lucide-react';
 
 export function AboutSection() {
   const focusAreas = [
-    { icon: Brain, title: 'AI Systems Engineering', color: 'text-blue-500' },
-    { icon: Cpu, title: 'NLP (BERT, LLaMA)', color: 'text-cyan-500' },
-    { icon: TrendingUp, title: 'ML Optimization', color: 'text-purple-500' },
-    { icon: Database, title: 'Applied Data Science', color: 'text-green-500' },
+    { icon: Brain, title: 'Applied AI & Data Science', color: 'text-blue-500' },
+    { icon: TrendingUp, title: 'MLOps & Reliability', color: 'text-cyan-500' },
+    { icon: Server, title: 'Infrastructure & DevOps', color: 'text-purple-500' },
+    { icon: Layout, title: 'UI/UX Systems Design', color: 'text-green-500' },
   ];
 
   const differentiators = [
     {
-      title: 'Systems over isolated models',
-      description: 'Building integrated AI architectures that work cohesively',
+      title: 'End-to-End System Thinking',
+      description: 'Architecting complete technical solutions by seamlessly bridging intelligent ML pipelines with scalable, secure infrastructures.',
     },
     {
-      title: 'Reliability (trust scoring, validation)',
-      description: 'Ensuring AI outputs are trustworthy and validated',
+      title: 'AI-Accelerated Engineering',
+      description: 'Pairing deep AI & Data Science expertise with AI-assisted development to rapidly design and deliver full-stack systems.',
     },
     {
-      title: 'Performance optimization',
-      description: 'Maximizing efficiency and reducing computational costs',
+      title: 'Built for Reliability',
+      description: 'Prioritizing resilient, fault-tolerant architectures across all deployments—from self-healing AI pipelines to Zero Trust networks.',
     },
   ];
 
@@ -46,10 +46,10 @@ export function AboutSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <p className="text-base md:text-lg text-foreground/80 leading-relaxed mb-6 md:mb-8">
-              I'm an AI Engineer specializing in building production-ready machine learning systems that solve real-world problems. With expertise spanning from NLP to predictive modeling, I focus on creating AI solutions that are not only accurate but also reliable, scalable, and maintainable.
+              I'm an AI Engineer and Data Scientist specializing in building production-ready machine learning systems, spanning from predictive modeling to NLP. Beyond AI, I maintain a strong theoretical foundation in architecture design across DevOps, cloud infrastructure, and modern web development.
             </p>
             <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
-              My approach combines deep technical knowledge with systems thinking, ensuring that every model I deploy is part of a robust, self-monitoring infrastructure designed for long-term success.
+              While AI and Data Science are my core technical strengths where I write code from the ground up, I leverage AI-assisted tools to help implement my theoretical designs for frontend interfaces and self-hosted infrastructure. This pragmatic approach allows me to deliver complete, well-architected systems—from robust ML pipelines to the web applications and secure servers that host them—without over-exaggerating my manual coding scope outside of AI.
             </p>
           </motion.div>
 
