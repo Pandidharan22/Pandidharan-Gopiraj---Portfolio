@@ -14,6 +14,7 @@ interface Project {
   results: string[];
   researchFocus?: string;
   demoLink?: string;
+  demoLinkLabel?: string;
   githubLink?: string;
 }
 
@@ -45,7 +46,31 @@ const projects: Project[] = [
     demoLink: 'https://github.com/Pandidharan22/Final-Year-Major-Project',
     githubLink: 'https://github.com/Pandidharan22/Final-Year-Major-Project',
   },
-
+  {
+    id: 'lokesh-portfolio',
+    title: 'Lokesh — Photographer Portfolio Website',
+    impact: 'Designed and developed a premium cinematic portfolio website for a professional photographer with immersive visuals, smooth animations, and a modern interactive user experience tailored for creative brand presentation.',
+    tags: ['React', 'Three.js', 'Tailwind CSS', 'Framer Motion'],
+    problem: 'Built a fully responsive showcase platform focused on visual storytelling, portfolio presentation, and client engagement for a freelance photography business.',
+    approach: 'Leveraged modern frontend tooling to build a cinematic UI/UX with smooth scrolling, immersive animations, and an optimized component-based architecture aligned with the client\'s premium creative brand.',
+    features: [
+      'Cinematic UI/UX with smooth scroll and motion-based interactions',
+      'Responsive gallery and portfolio presentation across devices',
+      'Interactive animations using Framer Motion and modern frontend tooling',
+      'Optimized image rendering and performance-focused frontend architecture',
+      'Clean, premium visual identity aligned with the client\'s creative brand',
+      'Modular component-based frontend structure for scalability and maintainability'
+    ],
+    results: [
+      'Successfully delivered as a paid freelance project worth ₹10,000',
+      'Helped establish a stronger digital presence for the client\'s photography brand',
+      'Demonstrated ability to build production-ready, client-focused creative web experiences',
+      'Showcases real-world project execution, design communication, and delivery capability'
+    ],
+    demoLink: 'https://lokesh-portfolio-beryl.vercel.app/',
+    demoLinkLabel: 'View Portfolio',
+    githubLink: 'https://github.com/Pandidharan22/Lokesh-Photographer-Portfolio',
+  },
 ];
 
 export function ProjectsSection() {
@@ -178,7 +203,7 @@ export function ProjectsSection() {
                   className="flex items-center gap-2 px-6 py-3 bg-foreground text-background border border-transparent rounded-lg hover:bg-background hover:text-foreground hover:border-foreground transition-all duration-300"
                 >
                   <ExternalLink className="w-4 h-4" />
-                  <span>View Demo</span>
+                  <span>{selectedProject.demoLinkLabel || 'View Demo'}</span>
                 </a>
               )}
               {selectedProject.githubLink && (
