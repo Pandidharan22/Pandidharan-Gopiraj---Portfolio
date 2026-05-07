@@ -32,6 +32,8 @@ const skills: Skill[] = [
   
   // Tools
   { name: 'Git', category: 'tools' },
+  { name: 'Docker', category: 'tools' },
+  { name: 'CI/CD Pipelines', category: 'tools' },
   { name: 'Jupyter', category: 'tools' },
   { name: 'Linux', category: 'tools' },
 ];

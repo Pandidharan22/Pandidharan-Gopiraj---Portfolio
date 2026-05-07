@@ -12,6 +12,7 @@ interface Project {
   approach: string;
   features: string[];
   results: string[];
+  researchFocus?: string;
   demoLink?: string;
   githubLink?: string;
 }
@@ -19,24 +20,28 @@ interface Project {
 const projects: Project[] = [
   {
     id: 'llm-ops',
-    title: 'Self-Healing LLM Ops Platform',
-    impact: 'Reduced model failures by 85% through automated monitoring and recovery',
-    tags: ['Python', 'LLM', 'MLOps', 'FastAPI', 'PostgreSQL'],
-    problem: 'Large language models in production often fail silently or produce unreliable outputs without proper monitoring and validation systems in place.',
-    approach: 'Built an end-to-end monitoring platform that validates LLM outputs using custom trust scoring, automatically detects anomalies, and triggers self-healing mechanisms when quality degrades.',
+    title: 'Autonomous Self-Healing RAG Ops Platform',
+    impact: 'Built a research-focused autonomous monitoring and recovery platform for Retrieval-Augmented Generation (RAG) systems with semantic validation, trust scoring, hallucination risk analysis, and deterministic self-healing pipelines.',
+    tags: ['Python', 'RAG', 'LLMOps', 'FastAPI', 'FAISS', 'Streamlit'],
+    problem: 'RAG-based AI systems can generate unreliable or hallucinated responses when retrieval quality degrades or contextual grounding becomes weak. Most systems lack deterministic validation, risk-aware recovery, and observability mechanisms required for reliable production deployment.',
+    approach: 'Designed and developed an end-to-end RAG reliability platform that evaluates retrieval confidence, measures hallucination risk, applies semantic guardrails, and autonomously triggers self-healing retries when response quality deteriorates.',
     features: [
-      'Real-time output validation with semantic similarity scoring',
-      'Automated model rollback on quality degradation',
-      'Trust score calculation for each prediction',
-      'Anomaly detection using statistical methods',
-      'Auto-scaling based on load patterns',
+      'Semantic retrieval validation using similarity scoring and confidence calibration',
+      'Hallucination risk modeling with refusal-aware guardrails',
+      'Deterministic self-healing retry pipeline with adaptive top-k expansion',
+      'Trust score calculation for every generated response',
+      'Real-time observability with telemetry tracing and latency analytics',
+      'Interactive Streamlit dashboard for monitoring confidence, risk, and recovery metrics',
+      'Deterministic ingestion and semantic chunking pipeline for RAG datasets',
+      'FAISS-powered vector retrieval with MiniLM embeddings'
     ],
     results: [
-      '85% reduction in model failures',
-      '60% faster incident detection',
-      '40% improvement in output quality',
-      'Saved 20+ hours/week in manual monitoring',
+      'Reduced unreliable RAG responses through automated risk-aware recovery',
+      'Improved response reliability using confidence-based validation pipelines',
+      'Enabled real-time monitoring and analytics for retrieval and generation quality',
+      'Built a reproducible research framework for evaluating RAG trustworthiness and self-healing strategies'
     ],
+    researchFocus: 'This project is a research-oriented MVP exploring reliability engineering for Retrieval-Augmented Generation (RAG) systems through deterministic validation, observability, and autonomous recovery mechanisms.',
     demoLink: 'https://github.com/Pandidharan22/Final-Year-Major-Project',
     githubLink: 'https://github.com/Pandidharan22/Final-Year-Major-Project',
   },
@@ -149,6 +154,19 @@ export function ProjectsSection() {
                 ))}
               </div>
             </div>
+
+            {/* Research Focus */}
+            {selectedProject.researchFocus && (
+              <div>
+                <h4 className="text-xl font-semibold mb-3 flex items-center gap-2">
+                  <Shield className="w-5 h-5 text-foreground font-semibold" />
+                  Research Focus
+                </h4>
+                <p className="text-foreground/80 leading-relaxed font-medium bg-foreground/5 p-4 rounded-lg border border-border">
+                  {selectedProject.researchFocus}
+                </p>
+              </div>
+            )}
 
             {/* Links */}
             <div className="flex flex-wrap gap-4 pt-4">
