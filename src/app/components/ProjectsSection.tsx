@@ -37,8 +37,8 @@ const projects: Project[] = [
       '40% improvement in output quality',
       'Saved 20+ hours/week in manual monitoring',
     ],
-    demoLink: '#',
-    githubLink: '#',
+    demoLink: 'https://github.com/Pandidharan22/Final-Year-Major-Project',
+    githubLink: 'https://github.com/Pandidharan22/Final-Year-Major-Project',
   },
 
 ];
@@ -147,6 +147,8 @@ export function ProjectsSection() {
               {selectedProject.demoLink && (
                 <a
                   href={selectedProject.demoLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 px-6 py-3 bg-foreground text-background border border-transparent rounded-lg hover:bg-background hover:text-foreground hover:border-foreground transition-all duration-300"
                 >
                   <ExternalLink className="w-4 h-4" />
@@ -156,6 +158,8 @@ export function ProjectsSection() {
               {selectedProject.githubLink && (
                 <a
                   href={selectedProject.githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 px-6 py-3 border border-foreground text-foreground font-semibold rounded-lg hover:bg-foreground hover:text-background transition-colors"
                 >
                   <Github className="w-4 h-4" />
