@@ -102,10 +102,15 @@ export function ContactSection() {
               <WhatsappIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               <span className="font-medium">Send a Message</span>
             </a>
-            <button className="w-full sm:w-auto inline-flex justify-center items-center gap-3 px-8 py-4 border border-foreground text-foreground rounded-lg hover:bg-foreground hover:text-background transition-all duration-300 group">
+            <a 
+              href="https://drive.google.com/file/d/1_8hSuTOb9d5zquX-Agr3zHaL6-AUniYK/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex justify-center items-center gap-3 px-8 py-4 border border-foreground text-foreground rounded-lg hover:bg-foreground hover:text-background transition-all duration-300 group"
+            >
               <Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
               <span className="font-medium">Download Resume</span>
-            </button>
+            </a>
           </motion.div>
         </motion.div>
 
