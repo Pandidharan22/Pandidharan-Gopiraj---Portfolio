@@ -4,10 +4,10 @@ A single-page, high-performance portfolio website built with React, Vite, and Ta
 
 ## Tech Stack
 
-- **Framework**: React 18, Vite
+- **Framework**: React 18, React3Fiber (R3F), Vite
 - **Styling**: Tailwind CSS v4, Custom Theming (Light/Dark mode)
 - **Animation**: Framer Motion
-- **UI Primitives**: Radix UI
+- **UI Primitives**: Radix UI 
 
 ## Getting Started
 
