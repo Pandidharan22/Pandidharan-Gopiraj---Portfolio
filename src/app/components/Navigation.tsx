@@ -147,10 +147,15 @@ export function Navigation({ theme, onThemeToggle, onNavigate }: NavigationProps
                 ))}
 
                 <div className="mt-4 pt-6 border-t border-border">
-                  <button className="w-full flex justify-center items-center gap-2 px-4 py-3 bg-foreground text-background border border-transparent rounded-lg hover:bg-background hover:text-foreground hover:border-foreground transition-all duration-300">
+                  <a 
+                    href="https://drive.google.com/file/d/1_8hSuTOb9d5zquX-Agr3zHaL6-AUniYK/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex justify-center items-center gap-2 px-4 py-3 bg-foreground text-background border border-transparent rounded-lg hover:bg-background hover:text-foreground hover:border-foreground transition-all duration-300"
+                  >
                     <Download className="w-5 h-5" />
                     <span>Download Resume</span>
-                  </button>
+                  </a>
                 </div>
               </div>
             </motion.div>
