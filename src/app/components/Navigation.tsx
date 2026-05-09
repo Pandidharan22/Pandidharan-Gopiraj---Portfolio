@@ -54,7 +54,7 @@ export function Navigation({ theme, onThemeToggle, onNavigate }: NavigationProps
             onClick={() => onNavigate(0)}
             className="text-xl font-bold text-foreground hover:opacity-70 transition-opacity"
           >
-            AI Engineer
+            PD
           </button>
 
           {/* Nav Links - Hidden on mobile */}
