@@ -27,7 +27,7 @@ jobs:
       - name: Deploy to Nginx Bind Mount
         run: |
           # 1. Clear out the old portfolio files to prevent stale data
-          Remove-Item -Path "D:\Projects\Nexus---Personal-Cloud-and-Automated-Portfolio-Homelab\portfolio-data\*" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item -Path "E:\Nexus---Personal-Cloud-and-Automated-Portfolio-Homelab\portfolio-data\*" -Recurse -Force -ErrorAction SilentlyContinue
           
           # 2. Copy the fresh build directly into the local homelab storage
-          Copy-Item -Path "dist\*" -Destination "D:\Projects\Nexus---Personal-Cloud-and-Automated-Portfolio-Homelab\portfolio-data\" -Recurse -Force
+          Copy-Item -Path "dist\*" -Destination "E:\Nexus---Personal-Cloud-and-Automated-Portfolio-Homelab\portfolio-data\" -Recurse -Force
