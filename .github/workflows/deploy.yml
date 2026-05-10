@@ -32,4 +32,4 @@ jobs:
           # 2. Copy the fresh build directly into the local homelab storage
           Copy-Item -Path "dist\*" -Destination "E:\Nexus---Personal-Cloud-and-Automated-Portfolio-Homelab\portfolio-data\" -Recurse -Force
 
-          docker restart nginx-portfolio
+          docker restart nginx_portfolio
