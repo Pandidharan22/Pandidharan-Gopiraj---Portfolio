@@ -21,30 +21,29 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: 'llm-ops',
-    title: 'Autonomous Self-Healing RAG Ops Platform',
-    impact: 'Built a research-focused autonomous monitoring and recovery platform for Retrieval-Augmented Generation (RAG) systems with semantic validation, trust scoring, hallucination risk analysis, and deterministic self-healing pipelines.',
-    tags: ['Python', 'RAG', 'LLMOps', 'FastAPI', 'FAISS', 'Streamlit'],
-    problem: 'RAG-based AI systems can generate unreliable or hallucinated responses when retrieval quality degrades or contextual grounding becomes weak. Most systems lack deterministic validation, risk-aware recovery, and observability mechanisms required for reliable production deployment.',
-    approach: 'Designed and developed an end-to-end RAG reliability platform that evaluates retrieval confidence, measures hallucination risk, applies semantic guardrails, and autonomously triggers self-healing retries when response quality deteriorates.',
+    id: 'self-reflective-rag',
+    title: 'Self-Reflective RAG Platform: Heuristic Hallucination Mitigation',
+    impact: 'An asynchronous, full-stack Retrieval-Augmented Generation (RAG) platform designed to autonomously evaluate its own retrieval confidence, mitigate domain hallucinations, and trigger self-reflective context expansion when high-risk queries are detected.',
+    tags: ['Python 3.11', 'FastAPI', 'React 18', 'Tailwind v4', 'Docker', 'FAISS'],
+    problem: 'Standard "Naive RAG" architectures suffer from a critical flaw: they blindly pass retrieved vector chunks to a Large Language Model regardless of semantic relevance, leading to confident hallucinations on out-of-domain queries.',
+    approach: 'Introduced an intermediate deterministic layer—the Heuristic Guardrail Engine—which mathematically evaluates the quality of the vector search before LLM inference occurs, calculating a Risk Score based on mean similarity and score spread.',
     features: [
-      'Semantic retrieval validation using similarity scoring and confidence calibration',
-      'Hallucination risk modeling with refusal-aware guardrails',
-      'Deterministic self-healing retry pipeline with adaptive top-k expansion',
-      'Trust score calculation for every generated response',
-      'Real-time observability with telemetry tracing and latency analytics',
-      'Interactive Streamlit dashboard for monitoring confidence, risk, and recovery metrics',
-      'Deterministic ingestion and semantic chunking pipeline for RAG datasets',
-      'FAISS-powered vector retrieval with MiniLM embeddings'
+      'Heuristic Guardrail Engine that evaluates vector search quality before LLM inference',
+      'Self-Reflection Loop that autonomously executes a secondary vector search with expanded context if Risk Score exceeds threshold',
+      'Ultra-Low Latency Inference utilizing Llama-3.1-8b-instant on Groq LPU architecture',
+      'Vector Memory & Ingestion using persistent FAISS-CPU IndexFlatIP and sentence-transformers',
+      'Strict prompt-engineering protocols forcing LLM refusals for adversarial out-of-domain queries',
+      'Containerized deployment architecture using Docker, Docker Compose, and Cloudflare Tunnels for Zero Trust Ingress'
     ],
     results: [
-      'Reduced unreliable RAG responses through automated risk-aware recovery',
-      'Improved response reliability using confidence-based validation pipelines',
-      'Enabled real-time monitoring and analytics for retrieval and generation quality',
-      'Built a reproducible research framework for evaluating RAG trustworthiness and self-healing strategies'
+      'Empirically evaluated against a strict 50-query dataset including in-domain fact retrieval, multi-hop queries, and out-of-domain adversarial traps',
+      'Triggered autonomous self-reflection correctly on 34% (17/50) of high-risk queries during benchmarking',
+      'Achieved a competitive average end-to-end latency of ~5.6 seconds for complex self-reflective multi-hop routing',
+      'Successfully refused 13 out of 15 adversarial out-of-domain hallucination traps'
     ],
-    researchFocus: 'This project is a research-oriented MVP exploring reliability engineering for Retrieval-Augmented Generation (RAG) systems through deterministic validation, observability, and autonomous recovery mechanisms.',
-    demoLink: 'https://github.com/Pandidharan22/Final-Year-Major-Project',
+    researchFocus: 'Empirical benchmarks revealed that while dynamic context expansion (Self-Reflection) successfully rescues low-confidence, in-domain queries, it introduces semantic noise when applied to purely out-of-domain adversarial queries. Future iterations will decouple "In-Domain Low Confidence" and "Out-of-Domain Detection" to optimize the expansion trigger.',
+    demoLink: 'https://self-reflective-rag.pandidharan.dev',
+    demoLinkLabel: 'Live Application',
     githubLink: 'https://github.com/Pandidharan22/Final-Year-Major-Project',
   },
   {
