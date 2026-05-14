@@ -48,7 +48,8 @@ const projects: Project[] = [
     researchFocus: 'Empirical benchmarks revealed that while dynamic context expansion (Self-Reflection) successfully rescues low-confidence, in-domain queries, it introduces semantic noise when applied to purely out-of-domain adversarial queries. Future iterations will decouple "In-Domain Low Confidence" and "Out-of-Domain Detection" to optimize the expansion trigger.',
     demoLink: 'https://self-reflective-rag.pandidharan.dev',
     demoLinkLabel: 'Live Application',
-    githubLink: 'https://github.com/Pandidharan22/Final-Year-Major-Project',
+    demoNote: '✨ This application is securely hosted and served directly from my Project Nexus homelab infrastructure.',
+    githubLink: 'https://github.com/Pandidharan22/Heuristic-Self-Reflective-RAG',
   },
   {
     id: 'project-nexus',
@@ -56,7 +57,7 @@ const projects: Project[] = [
     impact: [
       'Production-grade self-hosted homelab infrastructure.',
       'Combines a secure private cloud platform and an automated deployment server.',
-      'Impact: This very portfolio is hosted directly on this Nexus infrastructure!'
+      'Impact: This very portfolio and my Self-Reflective RAG platform are hosted here!'
     ],
     tags: ['Docker', 'Cloudflare Zero Trust', 'Nextcloud', 'Nginx', 'GitHub Actions', 'WSL2'],
     problem: 'Traditional self-hosting requires exposing local network ports to the internet, creating significant security risks. The goal was to build a dual-purpose server architecture on a local Windows machine providing secure global access to self-hosted services without exposing local machine ports.',
@@ -75,10 +76,10 @@ const projects: Project[] = [
       'Built a secure alternative to traditional cloud storage platforms with full data ownership',
       'Eliminated dependency on exposed router ports through Zero Trust tunneling architecture',
       'Established a production-style CI/CD workflow for automated frontend deployment',
-      'Currently hosting this React Three Fiber 3D portfolio reliably using optimized static asset serving'
+      'Currently hosting this portfolio and the Self-Reflective RAG platform securely and reliably'
     ],
     githubLink: 'https://github.com/Pandidharan22/Nexus---Personal-Cloud-and-Automated-Portfolio-Homelab',
-    demoNote: '✨ Live Demo? You are looking at it! This portfolio is hosted on Nexus.',
+    demoNote: '✨ Live Demo? You are looking at it! Both this portfolio and the Self-Reflective RAG platform are hosted on Nexus.',
   },
   {
     id: 'lokesh-portfolio',
