@@ -6,7 +6,7 @@ import { X, ExternalLink, Github, Zap, Shield, Gauge } from 'lucide-react';
 interface Project {
   id: string;
   title: string;
-  impact: string;
+  impact: string[];
   tags: string[];
   problem: string;
   approach: string;
@@ -23,7 +23,11 @@ const projects: Project[] = [
   {
     id: 'self-reflective-rag',
     title: 'Self-Reflective RAG Platform: Heuristic Hallucination Mitigation',
-    impact: 'An asynchronous, full-stack Retrieval-Augmented Generation (RAG) platform designed to autonomously evaluate its own retrieval confidence, mitigate domain hallucinations, and trigger self-reflective context expansion when high-risk queries are detected.',
+    impact: [
+      'Full-stack RAG platform featuring a Heuristic Guardrail Engine.',
+      'Autonomously detects and mitigates LLM hallucinations.',
+      'Impact: Successfully blocked 86% of adversarial out-of-domain traps.'
+    ],
     tags: ['Python 3.11', 'FastAPI', 'React 18', 'Tailwind v4', 'Docker', 'FAISS'],
     problem: 'Standard "Naive RAG" architectures suffer from a critical flaw: they blindly pass retrieved vector chunks to a Large Language Model regardless of semantic relevance, leading to confident hallucinations on out-of-domain queries.',
     approach: 'Introduced an intermediate deterministic layer—the Heuristic Guardrail Engine—which mathematically evaluates the quality of the vector search before LLM inference occurs, calculating a Risk Score based on mean similarity and score spread.',
@@ -49,7 +53,11 @@ const projects: Project[] = [
   {
     id: 'project-nexus',
     title: 'Project Nexus — Personal Cloud & Automated Portfolio Homelab',
-    impact: 'Engineered a production-grade self-hosted homelab infrastructure combining a secure private cloud platform and an automated deployment server. Note: This very portfolio is hosted directly on this Nexus infrastructure running on my laptop!',
+    impact: [
+      'Production-grade self-hosted homelab infrastructure.',
+      'Combines a secure private cloud platform and an automated deployment server.',
+      'Impact: This very portfolio is hosted directly on this Nexus infrastructure!'
+    ],
     tags: ['Docker', 'Cloudflare Zero Trust', 'Nextcloud', 'Nginx', 'GitHub Actions', 'WSL2'],
     problem: 'Traditional self-hosting requires exposing local network ports to the internet, creating significant security risks. The goal was to build a dual-purpose server architecture on a local Windows machine providing secure global access to self-hosted services without exposing local machine ports.',
     approach: 'Implemented a Zero-Surface-Area security architecture using outbound-only encrypted Cloudflare Tunnel routing. Designed a fully containerized infrastructure with Docker Compose, handling both a private Nextcloud instance and an automated CI/CD pipeline for a real-time Nginx web server.',
@@ -75,7 +83,11 @@ const projects: Project[] = [
   {
     id: 'lokesh-portfolio',
     title: 'Lokesh — Photographer Portfolio Website',
-    impact: 'Designed and developed a premium cinematic portfolio website for a professional photographer with immersive visuals, smooth animations, and a modern interactive user experience tailored for creative brand presentation.',
+    impact: [
+      'Premium cinematic portfolio website for a professional photographer.',
+      'Features immersive visuals, smooth animations, and interactive UX.',
+      'Impact: Delivered as a paid freelance project that elevated the client’s brand.'
+    ],
     tags: ['React', 'Three.js', 'Tailwind CSS', 'Framer Motion'],
     problem: 'Built a fully responsive showcase platform focused on visual storytelling, portfolio presentation, and client engagement for a freelance photography business.',
     approach: 'Leveraged modern frontend tooling to build a cinematic UI/UX with smooth scrolling, immersive animations, and an optimized component-based architecture aligned with the client\'s premium creative brand.',
@@ -100,7 +112,11 @@ const projects: Project[] = [
   {
     id: 'loan-risk-scoring',
     title: 'AI-Powered Loan Eligibility & Risk Scoring System',
-    impact: 'Built a production-grade end-to-end machine learning system for loan default risk prediction with a deployed FastAPI backend, real-time inference pipeline, and integrated frontend UI for financial risk assessment.',
+    impact: [
+      'End-to-end ML system for loan default risk prediction.',
+      'Deployed FastAPI backend with real-time inference pipeline.',
+      'Impact: Improved minority-class detection for financial risk assessment.'
+    ],
     tags: ['Python', 'FastAPI', 'Scikit-learn', 'SHAP', 'Docker', 'Hugging Face'],
     problem: 'Traditional loan approval systems often struggle with imbalanced datasets where default cases are rare, causing models to achieve misleadingly high accuracy while failing to identify high-risk applicants effectively.',
     approach: 'Designed a complete ML engineering pipeline focused on imbalanced binary classification, advanced feature engineering, threshold optimization, interpretability, and production deployment for real-time inference.',
@@ -181,7 +197,11 @@ export function ProjectsSection() {
           <div className="p-6 space-y-8">
             {/* Impact */}
             <div className="p-4 rounded-lg bg-foreground/5 border border-border">
-              <p className="text-lg text-foreground font-semibold font-medium">{selectedProject.impact}</p>
+              <ul className="list-disc pl-5 space-y-1 text-base md:text-lg text-foreground font-medium">
+                {selectedProject.impact.map((point, i) => (
+                  <li key={i}>{point}</li>
+                ))}
+              </ul>
             </div>
 
             {/* Problem Statement */}
@@ -311,7 +331,11 @@ export function ProjectsSection() {
                 <h3 className="text-xl font-semibold mb-3 group-hover:text-foreground font-semibold transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-sm text-foreground/70 mb-4">{project.impact}</p>
+                <ul className="list-disc pl-5 text-sm text-foreground/70 mb-4 space-y-1.5">
+                  {project.impact.map((point, i) => (
+                    <li key={i}>{point}</li>
+                  ))}
+                </ul>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.slice(0, 3).map((tag) => (
                     <span
